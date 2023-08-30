@@ -23,11 +23,11 @@ Danh sách đánh số chức năng ( chưa chính thức ):
 
 
 HỌ VÀ TÊN	CÔNG VIỆC
-HOÀNG TRỌNG TẤN	Thiết kế database, phân tích chức năng, code chức năng 3, 4 ,5 ,6 ,7 Test Code
-ĐẶNG VĂN PHỐ	Code chức năng 8, 9 , 10 , 11, 12
-ĐẶNG VĂN SƠN	Thiết kế database, code chức năng 13, 14, 15 , 16 ,17
-TRẦN ĐỨC HOÀNG	Vẽ biểu đồ Usecase tổng quát, chi tiết, tuần tự, hoạt động
-LÊ THANH HIẾU	Giao diện user, giao diện admin
-HÀ CÔNG TUẤN	Chức năng 1,2
+# HOÀNG TRỌNG TẤN	Thiết kế database, phân tích chức năng, code chức năng 3, 4 ,5 ,6 ,7 Test Code
+# ĐẶNG VĂN PHỐ	Code chức năng 8, 9 , 10 , 11, 12
+# ĐẶNG VĂN SƠN	Thiết kế database, code chức năng 13, 14, 15 , 16 ,17
+# TRẦN ĐỨC HOÀNG	Vẽ biểu đồ Usecase tổng quát, chi tiết, tuần tự, hoạt động
+# LÊ THANH HIẾU	Giao diện user, giao diện admin
+# HÀ CÔNG TUẤN	Chức năng 1,2
 
 

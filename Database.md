@@ -94,29 +94,30 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 ## 3.1. Kiến trúc cơ sở dữ liệu
 
  
-1. Đặc tả cơ sở dữ liệu:
+# Đặc tả cơ sở dữ liệu
 
+## Bảng: Khách hàng
 
-Bảng: Khách hàng
-Tên cột	Kiểu dữ liệu	Mô tả
-_id	ObjectId	id
-FisrtName	String	Họ
-LastName	String	Tên
-Email	String	Địa chỉ gmail
-Phone	String	Số điện thoại
-Address	String	Địa chỉ
+| Tên cột     | Kiểu dữ liệu | Mô tả             |
+|-------------|--------------|-------------------|
+| _id         | ObjectId     | id                |
+| FisrtName   | String       | Họ                |
+| LastName    | String       | Tên               |
+| Email       | String       | Địa chỉ gmail     |
+| Phone       | String       | Số điện thoại     |
+| Address     | String       | Địa chỉ           |
 
- 
+## Bảng: Thú cưng
 
-Bảng: Thú cưng
-Tên cột	Kiểu dữ liệu	Mô tả
-ID	ObjectId	Id
-Name	String	Họ và tên
-Species	String	Loại thú cưng
-Breed	String	Tên gọi thông dụng
-Age	Number	Tuổi
-Gender	String	Giống loài
-CustomerID	ObjectId (references Khách Hàng)	Id khách hàng
+| Tên cột     | Kiểu dữ liệu | Mô tả                  |
+|-------------|--------------|------------------------|
+| ID          | ObjectId     | Id                     |
+| Name        | String       | Họ và tên              |
+| Species     | String       | Loại thú cưng           |
+| Breed       | String       | Tên gọi thông dụng     |
+| Age         | Number       | Tuổi                   |
+| Gender      | String       | Giống loài             |
+| CustomerID  | ObjectId     | Id khách hàng (references Khách Hàng) |
 
  
 

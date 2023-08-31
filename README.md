@@ -178,24 +178,30 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | Payment Method   | string                        | Phương thức thanh toán |
 | InvoiceDate      | dateTime                      | Ngày Hoá Đơn       |
 
-# Bảng: NHÂN VIÊN
+# Bảng: USER
 
 | Tên cột       | Kiểu dữ liệu  | Mô tả       |
 |---------------|---------------|-------------|
 | ID            | ObjectID      | Id          |
-| HOVATEN       | string        | Họ và tên  |
-| EMAIL         | string        | Phòng ban   |
+| NAME          | string        | Họ và tên  |
 | CHUCVU        | string        | Chức vụ     |
-| SDT           | number        | Số điện thoại |
-| QUYENHAN      | number        | Quyền hạn   |
-| NGAYSINH      | string        | Ngày sinh   |
-| DIACHI        | string        | Địa chỉ     |
-| QUENQUAN      | string        | Quê quán    |
+| PHONE NUMBER           | number        | Số điện thoại |
+| ROLE      | number        | Quyền hạn   |
+| BIRTHDAY      | string        | Ngày sinh   |
+| LOCATION        | string        | Địa chỉ     |
+| HONETOWN      | string        | Quê quán    |
 | EMAIL         | string        | Email       |
-| TENDANGNHAP   | string        | Tên đăng nhập |
-| MATKHAU       | string        | Mật khẩu    |
+| USERNAME   | string        | Tên đăng nhập |
+| PASSWORD       | string        | Mật khẩu    |
 
- 
+# Bảng: Role
+
+| Tên cột       | Kiểu dữ liệu  | Mô tả       |
+|---------------|---------------|-------------|
+| ID            | ObjectID      | Id  Role    |
+| Name Role     | string        | Tên role    |
+
+
 
 # Bảng: Lịch Làm Việc
 

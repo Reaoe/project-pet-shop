@@ -113,12 +113,11 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 |-------------|--------------|------------------------|
 | ID          | ObjectId     | Id                     |
 | Name        | String       | Họ và tên              |
-| Species     | String       | Loại thú cưng           |
+| Species     | String       | Loại thú cưng          |
 | Breed       | String       | Tên gọi thông dụng     |
 | Age         | Number       | Tuổi                   |
 | Gender      | String       | Giống loài             |
 | CustomerID  | ObjectId     | Id khách hàng (references Khách Hàng) |
-
  
 
 # Bảng: Dịch Vụ
@@ -161,7 +160,6 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | Price          | Double                          | Giá Tiền       |
 | StockQuantity  | Int                             | Số Lượng       |
 | Supplier       | String                          | Nhà cung cấp   |
-
 
 
 # Bảng: Hoá Đơn

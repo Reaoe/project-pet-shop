@@ -140,14 +140,6 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | AppointmentDate | Date                         | Ngày hẹn             |
 | Status       | String                          | Trạng thái           |
 
-# Bảng: Thanh toán
-
-| Tên cột       | Kiểu dữ liệu                   | Mô tả             |
-|---------------|--------------------------------|-------------------|
-| ID            | ObjectId                       | id                |
-| AppointmentID | ObjectId (references Khách hàng) | Id                |
-| PaymentAmount | Double                         | Số tiền thanh toán |
-| PaymentDate   | Date                           | Ngày thanh toán   |
 
 # Bảng: Sản Phẩm
 
@@ -170,9 +162,6 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | CustomerID       | ObjectId (references Customers)| ID Khách Hàng      |
 | InvoiceItems     | ProductID: ObjectId(ref Products), Quantity: int, UnitPrice: Double | Mặt hàng hoá đơn, Số lượng, Đơn giá |
 |                  | ServiceItems: "ServiceID": ObjectId (references Services), Quantity: int, UnitPrice: double | Dịch vụ hoá đơn, Số lượng, Đơn giá |
-| TotalProductAmount | double                       | Tổng tiền sản phẩm |
-| TotalServiceAmount | double                       | Tổng Tiền Dịch Vụ |
-| TotalAmount      | Double                        | Tổng Tiền Cả Hai  |
 | Payment Method   | string                        | Phương thức thanh toán |
 | InvoiceDate      | dateTime                      | Ngày Hoá Đơn       |
 
@@ -200,7 +189,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | Name Role     | string        | Tên role    |
 
 
-
+Check
 # Bảng: Lịch Làm Việc
 
 | Tên cột      | Kiểu dữ liệu                | Mô tả             |

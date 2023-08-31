@@ -96,7 +96,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
  
 # Đặc tả cơ sở dữ liệu
 
-## Bảng: Khách hàng
+## Bảng: Khách hàng (KH SÀI)
 
 | Tên cột     | Kiểu dữ liệu | Mô tả             |
 |-------------|--------------|-------------------|
@@ -247,7 +247,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | StartDate          | datetime      | Ngày bắt đầu             |
 | EndDate            | datetime      | Ngày Kết Thúc            |
 
-# Bảng: Sự Kiện
+# Bảng: Sự Kiện ( KH SÀI )
 
 | Tên cột      | Kiểu dữ liệu  | Mô tả            |
 |--------------|---------------|------------------|

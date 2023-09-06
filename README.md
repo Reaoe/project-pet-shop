@@ -145,10 +145,10 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 
 | Tên cột        | Kiểu dữ liệu                    | Mô tả          |
 |----------------|---------------------------------|----------------|
-| ID             | ObjectId                        | ID Hoá Đơn     |
+| ID             | ObjectId                        | ID Sản phẩm    |
 | ProductName    | ObjectId (references Customers) | Tên Sản Phẩm   |
-| Description    | Double                          | Mô Tả          |
-| Category       | DateTime                        | Loại           |
+| Description    | String                          | Mô Tả          |
+| Category       | String                          | Loại           |
 | Price          | Double                          | Giá Tiền       |
 | StockQuantity  | Int                             | Số Lượng       |
 | Supplier       | String                          | Nhà cung cấp   |
@@ -189,16 +189,8 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | Name Role     | string        | Tên role    |
 
 
-Check
-# Bảng: Lịch Làm Việc
+Check ( bỏ ) bảng lịch làm việc
 
-| Tên cột      | Kiểu dữ liệu                | Mô tả             |
-|--------------|-----------------------------|-------------------|
-| ID           | ObjectID                    | id                |
-| EmployeeID   | ObjectID (ref Employess)    | Id Nhân viên      |
-| DayofWeek    | String                      | Số Ngày Làm       |
-| StartTime    | time                        | Giờ bắt đầu làm   |
-| EndTime      | time                        | Giờ tan làm       |
 
 # Bảng: Kho
 
@@ -210,10 +202,8 @@ Check
 | Quantity         | int           | Số Lượng                 |
 | UnitPrice        | double        | Giá Tiền                 |
 | Supplier         | string        | Nhà cung cấp             |
-| ReorderThreshold | Int           | Ngưỡng tái đặt hàng      |
 | LastRestocked    | dataTime      | Thời điểm nhập hàng gần nhất |
-| RestockedBy      | ObjectID (ref Employees) | Nhân viên nhập hàng    |
-| CheckedBy        | ObjectID (ref Employees) | Nhân viên kiểm tra     |
+
 
 # Bảng: Đánh Giá Từ Người Dùng
 

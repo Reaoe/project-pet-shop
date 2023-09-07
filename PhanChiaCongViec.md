@@ -16,9 +16,8 @@ Danh sách đánh số chức năng ( chưa chính thức ):
 11. Quản Lý Nhận Nuôi
 12. Quản lý kho
 13. Quản lý đánh giá
-14. Quản lý sự kiện
-15. Quản lý khuyến mãi
-16. Quản lý user
+14. Quản lý khuyến mãi
+15. Quản lý user
 
 
 HỌ VÀ TÊN	CÔNG VIỆC

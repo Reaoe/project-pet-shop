@@ -14,12 +14,11 @@ Danh sách đánh số chức năng ( chưa chính thức ):
 9. Quản Lý Lịch Hẹn Dịch Vụ
 10. Quản Lý Thanh Toán 
 11. Quản Lý Nhận Nuôi
-12. Quản lý Lịch làm việc
-13. Quản lý kho
-14. Quản lý đánh giá
-15. Quản lý sự kiện
-16. Quản lý khuyến mãi
-17. Quản lý user
+12. Quản lý kho
+13. Quản lý đánh giá
+14. Quản lý sự kiện
+15. Quản lý khuyến mãi
+16. Quản lý user
 
 
 HỌ VÀ TÊN	CÔNG VIỆC

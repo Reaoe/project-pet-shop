@@ -96,16 +96,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
  
 # Đặc tả cơ sở dữ liệu
 
-## Bảng: Khách hàng (KH SÀI)
 
-| Tên cột     | Kiểu dữ liệu | Mô tả             |
-|-------------|--------------|-------------------|
-| _id         | ObjectId     | id                |
-| FisrtName   | String       | Họ                |
-| LastName    | String       | Tên               |
-| Email       | String       | Địa chỉ gmail     |
-| Phone       | String       | Số điện thoại     |
-| Address     | String       | Địa chỉ           |
 
 ## Bảng: Thú cưng
 
@@ -148,10 +139,21 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | ID             | ObjectId                        | ID Sản phẩm    |
 | ProductName    | ObjectId (references Customers) | Tên Sản Phẩm   |
 | Description    | String                          | Mô Tả          |
-| Category       | String                          | Loại           |
+| Category       | ObjectID(Ref danh mục)                          | ID danh mục         |
 | Price          | Double                          | Giá Tiền       |
 | StockQuantity  | Int                             | Số Lượng       |
 | Supplier       | String                          | Nhà cung cấp   |
+
+
+# Bảng: Danh Mục Sản Phẩm
+
+| Tên cột        | Kiểu dữ liệu                    | Mô tả          |
+|----------------|---------------------------------|----------------|
+| ID             | ObjectId                        | ID Danh Mục    |
+| ParentCategoryID    | ObjectId  | ID Danh mục cha |
+| Description    | String                          | Mô Tả Danh Mục          |
+| CategoryName       | String                          | Tên Danh Mục           |
+
 
 
 # Bảng: Hoá Đơn
@@ -163,7 +165,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | InvoiceItems     | ProductID: ObjectId(ref Products), Quantity: int, UnitPrice: Double | Mặt hàng hoá đơn, Số lượng, Đơn giá |
 |                  | ServiceItems: "ServiceID": ObjectId (references Services), Quantity: int, UnitPrice: double | Dịch vụ hoá đơn, Số lượng, Đơn giá |
 | Payment Method   | string                        | Phương thức thanh toán |
-| InvoiceDate      | dateTime                      | Ngày Hoá Đơn       |
+| InvoiceDate      | date                          | Ngày Hoá Đơn       |
 
 # Bảng: USER
 
@@ -173,7 +175,7 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 | NAME          | string        | Họ và tên  |
 | CHUCVU        | string        | Chức vụ     |
 | PHONE NUMBER           | number        | Số điện thoại |
-| ROLE      | number        | Quyền hạn   |
+| ROLE      | ObjectID(ref role)        | Quyền hạn   |
 | BIRTHDAY      | string        | Ngày sinh   |
 | LOCATION        | string        | Địa chỉ     |
 | HONETOWN      | string        | Quê quán    |
@@ -202,7 +204,7 @@ Check ( bỏ ) bảng lịch làm việc
 | Quantity         | int           | Số Lượng                 |
 | UnitPrice        | double        | Giá Tiền                 |
 | Supplier         | string        | Nhà cung cấp             |
-| LastRestocked    | dataTime      | Thời điểm nhập hàng gần nhất |
+| LastRestocked    | date      | Thời điểm nhập hàng gần nhất |
 
 
 # Bảng: Đánh Giá Từ Người Dùng
@@ -213,7 +215,7 @@ Check ( bỏ ) bảng lịch làm việc
 | CustomerID   | ObjectId (references Customers) | ID Khách Hàng   |
 | Rating       | int                             | Số Sao          |
 | Comment      | string                          | Đánh Giá        |
-| ReviewDate   | datetime                        | Ngày gửi đánh giá |
+| ReviewDate   | date                       | Ngày gửi đánh giá |
 
 # Bảng: Khuyến mãi
 
@@ -223,18 +225,10 @@ Check ( bỏ ) bảng lịch làm việc
 | PromotionName      | string        | Tên khuyến mãi           |
 | Description        | string        | Mô tả                    |
 | DiscountPercentage | double        | Phần trăm khuyến mãi     |
-| StartDate          | datetime      | Ngày bắt đầu             |
-| EndDate            | datetime      | Ngày Kết Thúc            |
+| StartDate          | date      | Ngày bắt đầu             |
+| EndDate            | date      | Ngày Kết Thúc            |
 
-# Bảng: Sự Kiện ( KH SÀI )
 
-| Tên cột      | Kiểu dữ liệu  | Mô tả            |
-|--------------|---------------|------------------|
-| ID           | ObjectID      | id               |
-| EventName    | string        | Tên Sự Kiện      |
-| Description  | string        | Mô tả            |
-| EventDate    | double        | Ngày Diễn Ra     |
-| Location     | string        | Địa Điểm         |
 
 
 

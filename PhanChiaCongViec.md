@@ -8,16 +8,17 @@ Danh sách đánh số chức năng ( chưa chính thức ):
 3. Giỏ Hàng 
 4. Thanh Toán
 5. Đặt Hàng
-6. Quản lý khách hàng
 7. Quản Lý Thú Cưng
 8. Quản Lý Dịch Vụ
 9. Quản Lý Lịch Hẹn Dịch Vụ
 10. Quản Lý Thanh Toán 
 11. Quản Lý Nhận Nuôi
-12. Quản lý kho
-13. Quản lý đánh giá
-14. Quản lý khuyến mãi
-15. Quản lý user
+12. Quản lý Sản phẩm
+13. Quản lý đơn hàng
+14. Quản lý danh mục
+15. Quản lý đánh giá
+16. Quản lý khuyến mãi // 
+17. Quản lý user
 
 
 HỌ VÀ TÊN	CÔNG VIỆC

@@ -1,0 +1,20 @@
+[
+  {
+    "productName": "Chó xù",
+    "productCreater": "Đặng Sơn",
+    "description": "Chó rất nhiều lông",
+    "category": "Chó cảnh",
+    "price": 1000000,
+    "stockQuantity": 5,
+    "imgae": "anh1.png"
+  },
+  {
+    "productName": "Chó lông ngắn",
+    "productCreater": "Trần đức hoàng",
+    "description": "Chó rất lông ngắn",
+    "category": "Chó cảnh",
+    "price": 1500000,
+    "stockQuantity": 4,
+    "imgae": "anh2.png"
+  }
+]

@@ -7,5 +7,6 @@ const path = {
   SERVICES: 'pet-services',
   CONTACT: 'pet-contact',
   CART: 'shopping-cart',
+  DETAIL: 'detail',
 };
 export default path;

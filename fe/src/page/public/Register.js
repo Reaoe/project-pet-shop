@@ -40,9 +40,19 @@ const Register = () => {
                 placeholder="Password"
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
-              <input
+              {/* <input
                 type="password"
                 placeholder="Confirm Password"
+                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+              /> */}
+              <input
+                type="text"
+                placeholder="Address"
+                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+              />
+              <input
+                type="text"
+                placeholder="Phone Number"
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
             </div>

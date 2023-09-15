@@ -1,5 +1,7 @@
 import React from 'react';
 import anh from '../../img/a1.jpg';
+import path from '../../ultils/path';
+import { Link } from 'react-router-dom';
 
 const data = [
   {

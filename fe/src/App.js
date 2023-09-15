@@ -8,6 +8,7 @@ import {
   Cart,
   Product,
   Services,
+  Details,
 } from './page/public';
 import path from './ultils/path';
 import { Routes, Route } from 'react-router-dom';
@@ -21,6 +22,7 @@ function App() {
           <Route path={path.CONTACT} element={<Contact />} />
           <Route path={path.PRODUCT} element={<Product />} />
           <Route path={path.SERVICES} element={<Services />} />
+          <Route path={path.DETAIL} element={<Details />} />
         </Route>
         <Route path={path.CART} element={<Cart />} />
 

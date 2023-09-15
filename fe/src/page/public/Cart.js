@@ -32,7 +32,7 @@ const cart = () => {
   return (
     <div className="w-[92%] mx-auto font-normal text-lg">
       <div className="w-2/3 border-b-2 border-gray-400 py-3">
-        <Link to={`/${path.HOME}`}>
+        <Link to={`/${path.PRODUCT}`}>
           <h1 className="text-lg font-medium hover:cursor-pointer">
             {'<'}Tiếp tục mua hàng
           </h1>
@@ -77,24 +77,6 @@ const cart = () => {
             </>
           );
         })}
-        {/* <img src="" alt="" className="w-[125px] h-[128px]" />
-        <div>
-          <h1>Mèo tam thể</h1>
-          <p>Đực</p>
-        </div>
-        <div className="flex flex-row justify-center items-center">
-          <input type="text" value={1} className="w-6" />
-          <div>
-            <AiFillCaretUp />
-            <AiFillCaretDown />
-          </div>
-        </div>
-        <p>
-          10.000.000<span>đ</span>
-        </p>
-        <div className="">
-          <BsTrash />
-        </div> */}
       </div>
     </div>
   );

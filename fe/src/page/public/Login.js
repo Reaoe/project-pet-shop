@@ -15,7 +15,7 @@ const Login = () => {
             Start for free and get attractive offers from the community
           </p>
         </div>
-        <img src={nen} className="w-full h-full object-cover" />
+        <img src={nen} alt="" className="w-full h-full object-cover" />
       </div>
       <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-around items-center">
         <h1 className="w-full  max-w-[500px] mx-auto text-xl text-[#060606] font-semibold mr-auto">

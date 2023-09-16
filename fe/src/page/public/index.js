@@ -7,3 +7,4 @@ export { default as Cart } from './Cart';
 export { default as Product } from './Product';
 export { default as Services } from './Services';
 export { default as Details } from './Details';
+export { default as Profile } from './Profile';

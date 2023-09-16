@@ -9,6 +9,7 @@ import {
   Product,
   Services,
   Details,
+  Profile,
 } from './page/public';
 import path from './ultils/path';
 import { Routes, Route } from 'react-router-dom';
@@ -23,6 +24,7 @@ function App() {
           <Route path={path.PRODUCT} element={<Product />} />
           <Route path={path.SERVICES} element={<Services />} />
           <Route path={path.DETAIL} element={<Details />} />
+          <Route path={path.PROFILE} element={<Profile />} />
         </Route>
         <Route path={path.CART} element={<Cart />} />
 

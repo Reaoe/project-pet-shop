@@ -8,5 +8,6 @@ const path = {
   CONTACT: 'pet-contact',
   CART: 'shopping-cart',
   DETAIL: 'detail',
+  PROFILE: 'profile',
 };
 export default path;

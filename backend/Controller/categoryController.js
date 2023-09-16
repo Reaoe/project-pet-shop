@@ -15,19 +15,6 @@ exports.createCategory = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createCategoryType = catchAsync(async (req, res, next) => {
-  // const { nameCategory, parent } = req.body;
-  // console.log(req.body);
-  const categoryType = await CategoryType.create(req.body);
-
-  res.status(201).json({
-    status: 'Success',
-    data: {
-      data: categoryType,
-    },
-  });
-});
-
 exports.updateCategory = catchAsync(async (req, res, next) => {
   console.log(req.body);
   console.log(req.params.id);
@@ -71,16 +58,6 @@ exports.getAllCategory = catchAsync(async (req, res, next) => {
     status: 'Success',
     data: {
       data: getAllCategory,
-    },
-  });
-});
-
-exports.getAllCategoryType = catchAsync(async (req, res, next) => {
-  const getAllCategoryType = await CategoryType.find().populate('parent');
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      data: getAllCategoryType,
     },
   });
 });

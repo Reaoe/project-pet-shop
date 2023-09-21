@@ -1,7 +1,6 @@
 const Category = require("../Model/categoryModel");
 const AppError = require("../Utils/appError");
 const catchAsync = require("../Utils/catchAsync");
-const CategoryType = require("../Model/categoryTypeModel");
 exports.createCategory = catchAsync(async (req, res, next) => {
   // const { nameCategory, parent } = req.body;
   // console.log(req.body);
@@ -10,20 +9,7 @@ exports.createCategory = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: "Success",
     data: {
-      data: category,
-    },
-  });
-});
-
-exports.createCategoryType = catchAsync(async (req, res, next) => {
-  // const { nameCategory, parent } = req.body;
-  // console.log(req.body);
-  const categoryType = await CategoryType.create(req.body);
-
-  res.status(201).json({
-    status: "Success",
-    data: {
-      data: categoryType,
+      category,
     },
   });
 });
@@ -47,7 +33,7 @@ exports.updateCategory = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "Success",
     data: {
-      data: updateCategory,
+      updateCategory,
     },
   });
 });
@@ -70,23 +56,14 @@ exports.getAllCategory = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "Success",
     data: {
-      data: getAllCategory,
-    },
-  });
-});
-
-exports.getAllCategoryType = catchAsync(async (req, res, next) => {
-  const getAllCategoryType = await CategoryType.find().populate("parent");
-  res.status(200).json({
-    status: "Success",
-    data: {
-      data: getAllCategoryType,
+      getAllCategory,
     },
   });
 });
 
 exports.getOneCategory = catchAsync(async (req, res, next) => {
-  const getOneCategory = await Category.find(req.params.id);
+  console.log(req.params.id);
+  const getOneCategory = await Category.findById(req.params.id);
 
   if (!getOneCategory) {
     return next(new AppError("Khong ton tai Id danh muc de thuc hien", 404));

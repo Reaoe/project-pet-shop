@@ -1,32 +1,7 @@
 const Product = require("../Model/productModel");
-const configFireBase = require("../config/FirebaseConfig");
-const firebase = require("firebase/app");
-const {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} = require("firebase/storage");
-const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/appError");
-firebase.initializeApp(configFireBase);
-const storage = getStorage();
-
-const getLinkURL = async (file, name = "") => {
-  file.originalname = `proudct-${name}-${Date.now()}.jpeg`;
-
-  const storageRef = ref(storage, "image/" + file.originalname);
-
-  const metadata = {
-    contentType: "image/jpeg",
-  };
-
-  const snapshot = await uploadBytes(storageRef, file.buffer, metadata);
-
-  const linkURL = await getDownloadURL(snapshot.ref);
-
-  return linkURL;
-};
+const catchAsync = require("../Utils/catchAsync");
+const getLinkURL = require("../Utils/firebase");
 
 exports.createProduct = catchAsync(async (req, res, next) => {
   if (!req.file) {
@@ -38,7 +13,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: "Success",
     data: {
-      data: product,
+      product,
     },
   });
 });
@@ -65,7 +40,7 @@ exports.updateOneProduct = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "Success",
     data: {
-      data: updateProduct,
+      updateProduct,
     },
   });
 });
@@ -80,14 +55,15 @@ exports.deleteOneProuduct = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: "success",
-    data: {
-      data: null,
-    },
+    data: null,
   });
 });
 
 exports.getAllProduct = catchAsync(async (req, res, next) => {
-  const getAllProduct = await Product.find();
+  const getAllProduct = await Product.find().populate(
+    "productCreater category",
+    "firstName lastName nameCategory "
+  );
   res.status(200).json({
     status: "succes",
     data: {
@@ -97,14 +73,17 @@ exports.getAllProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.getOneProduct = catchAsync(async (req, res, next) => {
-  const getOneProduct = await Product.findById(req.params.id);
+  const getOneProduct = await Product.findById(req.params.id).populate(
+    "productCreater category",
+    "firstName lastName nameCategory "
+  );
   if (!getOneProduct) {
     return next(new AppError("Khong tim thay Id san pham nay ", 404));
   }
   res.status(200).json({
     status: "succes",
     data: {
-      doc,
+      getOneProduct,
     },
   });
 });

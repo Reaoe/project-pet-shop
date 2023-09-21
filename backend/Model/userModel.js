@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, "Xin vui long dien ten cua ban!"],
+    required: [false, "Xin vui long dien ten cua ban!"],
   },
   lastName: {
     type: String,
-    required: [true, "Xin vui long dien ten cua ban!"],
+    required: [false, "Xin vui long dien ten cua ban!"],
   },
   email: {
     type: String,
@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-
     // unique: true,
     //  validate: [validator.isEmail, 'Please provide a valid email']
   },
@@ -44,9 +43,29 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     select: false,
   },
-  // passwordResetToken: String,
-  // passwordResetExpires: Date,
+  image: {
+    type: String,
+    //required: [true, "khong duoc de trong anh"],
+    // default: "default.png",
+  },
 });
+
+userSchema.pre("save", async function (next) {
+  // Dòng này kiểm tra xem trường password của tài liệu đã được thay đổi hay chưa
+  if (!this.isModified("password")) {
+    return next();
+  }
+  // Mã hóa passworld
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  usePassword
+) {
+  return await bcrypt.compare(candidatePassword, usePassword);
+};
 
 const User = mongoose.model("User", userSchema);
 

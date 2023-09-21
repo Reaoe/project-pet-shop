@@ -3,15 +3,16 @@ const mongoose = require("mongoose");
 const serviceSchema = new mongoose.Schema({
   serviceName: {
     type: String,
-    required: [true, "Ten pet khong duoc de trong"],
+    required: [true, "Ten dich vu khong duoc de trong"],
     unique: true,
   },
-  description: {
-    type: String,
-  },
+
   price: {
     type: Number,
     required: [true, "khong duoc de trong so tien"],
+  },
+  description: {
+    type: String,
   },
 });
 

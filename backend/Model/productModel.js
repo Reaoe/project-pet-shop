@@ -10,16 +10,14 @@ const productSchema = new mongoose.Schema({
     minlength: [2, "ten san pham lon hon 10 ky tu"],
   },
   productCreater: {
-    type: String,
-    //type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
     required: [true, "Ten san pham khong duoc de trong"],
   },
-  description: {
-    type: String,
-  },
   category: {
-    type: String,
-    required: [true, "khong duoc de trong loai"],
+    type: mongoose.Schema.ObjectId,
+    ref: "Category",
+    required: [true, "khong duoc de trong danh muc"],
   },
   price: {
     type: Number,
@@ -33,6 +31,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "khong duoc de trong anh"],
     default: "default.png",
+  },
+  description: {
+    type: String,
+    default: null,
   },
 });
 

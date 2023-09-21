@@ -1,9 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import nen from '../../img/nen.jpg';
 import { Link } from 'react-router-dom';
 import path from '../../ultils/path';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const kt = ['true'];
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
+
+  function handleInput(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs((state) => ({ ...state, [name]: value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let errorsSubmit = [];
+    let flag = true;
+
+    if (inputs.email === '') {
+      errorsSubmit.email = 'Vui lòng nhập email';
+      flag = false;
+    }
+    if (inputs.password === '') {
+      errorsSubmit.password = 'Vui lòng nhập mật khẩu';
+      flag = false;
+    }
+    if (!flag) {
+      setErrors(errorsSubmit);
+    } else {
+      const data = {
+        email: inputs.email,
+        password: inputs.password,
+      };
+
+      axios
+        .post('http://localhost:8080/api/v1/users/login', data)
+        .then((response) => {
+          if (response.data.error) {
+            setErrors(response.data.error);
+          } else {
+            localStorage.setItem('login', JSON.stringify(response.data));
+          }
+        });
+      localStorage.setItem('kt', JSON.stringify(kt));
+    }
+    if (kt === 'true') {
+      navigate('/');
+    } else {
+      navigate('/login');
+    }
+  }
+  function renderError() {
+    if (Object.keys(errors).length > 0) {
+      return Object.keys(errors).map((key, index) => {
+        return <p key={index}>{errors[key]}</p>;
+      });
+    }
+  }
+
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -29,16 +91,23 @@ const Login = () => {
               Welcome Back! Please enter your details
             </p>
           </div>
-          <form>
+          {renderError()}
+          <form onSubmit={handleSubmit}>
             <div className="w-full flex flex-col">
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
+                value={inputs.email}
+                onChange={handleInput}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
               <input
                 type="password"
+                name="password"
                 placeholder="Password"
+                value={inputs.password}
+                onChange={handleInput}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
             </div>
@@ -53,7 +122,10 @@ const Login = () => {
               </p>
             </div>
             <div className="w-full flex flex-col my-4">
-              <button className="w-full text-white my-2 font-semibold bg-[#060606] rounded-md p-4 text-center flex items-center justify-center">
+              <button
+                type="submit"
+                className="w-full text-white my-2 font-semibold bg-[#060606] rounded-md p-4 text-center flex items-center justify-center"
+              >
                 Login
               </button>
             </div>

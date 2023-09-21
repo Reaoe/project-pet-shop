@@ -1,4 +1,6 @@
 import path from './path';
+import icons from './icons';
+const { AiOutlineDashboard, MdGroups, TbBrandProducthunt, RiBillLine } = icons;
 export const navigation = [
   {
     id: 1,
@@ -19,5 +21,44 @@ export const navigation = [
     id: 4,
     value: 'Liên hệ',
     path: `/${path.CONTACT}`,
+  },
+];
+export const adminSidebar = [
+  {
+    id: 1,
+    type: 'SIGNLE',
+    text: 'Dashboard',
+    path: `/${path.ADMIN}/${path.DASHBOARD}`,
+    icons: <AiOutlineDashboard />,
+  },
+  {
+    id: 2,
+    type: 'SIGNLE',
+    text: 'Manage User',
+    path: `/${path.ADMIN}/${path.MANAGE_USER}`,
+    icons: <MdGroups />,
+  },
+  {
+    id: 3,
+    type: 'PARENT',
+    text: 'Manage Product',
+    icons: <TbBrandProducthunt />,
+    submenu: [
+      {
+        text: 'Create Product',
+        path: `/${path.ADMIN}/${path.CREATE_PRODUCT}`,
+      },
+      {
+        text: 'Manage Product',
+        path: `/${path.ADMIN}/${path.MANAGE_PRODUCT}`,
+      },
+    ],
+  },
+  {
+    id: 4,
+    type: 'SIGNLE',
+    text: 'Manage Orders',
+    path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
+    icons: <RiBillLine />,
   },
 ];

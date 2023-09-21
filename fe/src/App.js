@@ -1,5 +1,13 @@
 import './App.css';
 import {
+  AdminLayout,
+  CreateProduct,
+  Dashboard,
+  ManageOrder,
+  ManageProduct,
+  ManageUser,
+} from './page/admin';
+import {
   Login,
   Register,
   Public,
@@ -26,8 +34,16 @@ function App() {
           <Route path={path.DETAIL} element={<Details />} />
           <Route path={path.PROFILE} element={<Profile />} />
         </Route>
-        <Route path={path.CART} element={<Cart />} />
 
+        <Route path={path.ADMIN} element={<AdminLayout />}>
+          <Route path={path.DASHBOARD} element={<Dashboard />} />
+          <Route path={path.MANAGE_ORDER} element={<ManageOrder />} />
+          <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
+          <Route path={path.MANAGE_USER} element={<ManageUser />} />
+          <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
+        </Route>
+
+        <Route path={path.CART} element={<Cart />} />
         <Route path={path.LOGIN} element={<Login />} />
         <Route path={path.REGISTER} element={<Register />} />
       </Routes>

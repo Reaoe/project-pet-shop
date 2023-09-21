@@ -62,10 +62,12 @@ const Sidebar = () => {
       </h1>
       <div className="flex flex-col gap-2 px-8">
         {data.map((item) => {
+          // console.log(item.parent.nameCategory);
+          // console.log(item.nameTypeCategory);
           return (
             <div className="" key={item.id}>
               <p className="text-base hover:cursor-pointer">
-                {item.nameCategory}
+                {item.nameTypeCategory}
               </p>
             </div>
           );

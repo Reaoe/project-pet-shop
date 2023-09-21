@@ -10,7 +10,7 @@ const Product = () => {
       .get('http://localhost:8080/api/v1/product')
       .then((response) => {
         setData(response.data.data.getAllProduct);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -22,9 +22,10 @@ const Product = () => {
       <div className="w-full">
         <div className="grid grid-cols-3 gap-y-6 px-4 py-8">
           {data.map((item) => {
-            // console.log(item._id);
+            console.log(`/${path.PRODUCT}` + `/${item._id}`);
+
             return (
-              <Link to={`/${path.DETAIL}`}>
+              <Link to={`/${path.PRODUCT}` + `/${item._id}`}>
                 <div className="border-2 rounded-3xl flex flex-col justify-start mx-4">
                   <img
                     src={item.image}

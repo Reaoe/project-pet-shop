@@ -6,7 +6,13 @@ const categoryRouter = require('./Router/categoryRouter');
 const userRouter = require('./Router/userRouter');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 const AppError = require('./Utils/appError');
+const globalErrorHandler = require('./Controller/errorController');
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 const port = process.env.PORT || 5000;
 dbConnect();

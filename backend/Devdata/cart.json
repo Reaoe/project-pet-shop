@@ -1,0 +1,38 @@
+{
+  "status": "succes",
+  "data": {
+    "getAllCart": [
+      {
+        "_id": "650dacf8173822e0b7b9e3b0",
+        "customer": {
+          "_id": "6501bc7ad6cd5febdb7eaea5",
+          "firstName": "Dang Van",
+          "lastName": "Son"
+        },
+        "product": [
+          {
+            "productItem": {
+              "_id": "650909175b95d1b0a1197192",
+              "productName": "Mèo Anh Lông Ngắn Màu Silver",
+              "price": 2000000
+            },
+            "quantity": 2,
+            "_id": "650dacf8173822e0b7b9e3b1"
+          },
+          {
+            "productItem": {
+              "_id": "6509093e5b95d1b0a1197194",
+              "productName": "Mèo Anh Lông Ngắn",
+              "price": 1000000
+            },
+            "quantity": 1,
+            "_id": "650dacf8173822e0b7b9e3b2"
+          }
+        ],
+        "status": "active",
+        "modifiedOn": "2023-09-22T15:04:24.273Z",
+        "__v": 0
+      }
+    ]
+  }
+}

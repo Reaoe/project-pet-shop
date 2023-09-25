@@ -1,11 +1,9 @@
 const Category = require('../Model/categoryModel');
 const AppError = require('../Utils/appError');
 const catchAsync = require('../Utils/catchAsync');
+const mongoose = require('mongoose');
 exports.createCategory = catchAsync(async (req, res, next) => {
-  // const { nameCategory, parent } = req.body;
-  // console.log(req.body);
   const category = await Category.create(req.body);
-
   res.status(201).json({
     status: 'Success',
     data: {
@@ -64,12 +62,22 @@ exports.deleteCategory = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllCategory = catchAsync(async (req, res, next) => {
-  const getAllCategory = await Category.find().populate('parent');
+exports.getParentCategory = catchAsync(async (req, res, next) => {
+  const getParentCategory = await Category.find({ parent: null });
   res.status(200).json({
     status: 'Success',
     data: {
-      getAllCategory,
+      getParentCategory,
+    },
+  });
+});
+
+exports.getChildCategory = catchAsync(async (req, res, next) => {
+  const getChildCategory = await Category.find({ parent: { $ne: null } });
+  res.status(200).json({
+    status: 'Success',
+    data: {
+      getChildCategory,
     },
   });
 });
@@ -85,8 +93,9 @@ exports.getAllCategoryType = catchAsync(async (req, res, next) => {
 });
 
 exports.getOneCategory = catchAsync(async (req, res, next) => {
-  console.log(req.params.id);
-  const getOneCategory = await Category.findById(req.params.id);
+  const getOneCategory = await Category.find({
+    parent: new mongoose.Types.ObjectId(req.params.id),
+  });
 
   if (!getOneCategory) {
     return next(new AppError('Khong ton tai Id danh muc de thuc hien', 404));

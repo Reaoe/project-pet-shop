@@ -6,6 +6,10 @@ const categorySchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category", // Tham chiếu lại chính mô hình danh mục
+  },
 });
 
 const Category = mongoose.model('Category', categorySchema);

@@ -9,11 +9,11 @@ exports.updateInformationUser = catchAsync(async (req, res, next) => {
   const { email, role } = req.body;
 
   if (email) {
-    return next(new AppError("Cannot update email", 400));
+    return next(new AppError("Cannot update email", 404));
   }
 
   if (role) {
-    return next(new AppError("Cannot update role", 400));
+    return next(new AppError("Cannot update role", 404));
   }
   const updateData = { ...req.body };
   if (req.file) {

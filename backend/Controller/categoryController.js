@@ -2,6 +2,7 @@ const Category = require('../Model/categoryModel');
 const AppError = require('../Utils/appError');
 const catchAsync = require('../Utils/catchAsync');
 const mongoose = require('mongoose');
+
 exports.createCategory = catchAsync(async (req, res, next) => {
   const category = await Category.create(req.body);
   res.status(201).json({
@@ -97,7 +98,7 @@ exports.getOneCategory = catchAsync(async (req, res, next) => {
     parent: new mongoose.Types.ObjectId(req.params.id),
   });
 
-  if (!getOneCategory) {
+  if (getOneCategory.length === 0) {
     return next(new AppError('Khong ton tai Id danh muc de thuc hien', 404));
   }
 

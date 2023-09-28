@@ -9,11 +9,6 @@ const productSchema = new mongoose.Schema({
     maxlength: [100, "ten san pham nho hon 100 ky tu"],
     minlength: [2, "ten san pham lon hon 10 ky tu"],
   },
-  productCreater: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: [true, "Ten san pham khong duoc de trong"],
-  },
   category: {
     type: mongoose.Schema.ObjectId,
     ref: "Category",

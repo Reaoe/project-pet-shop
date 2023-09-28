@@ -37,6 +37,7 @@ exports.updateOneProduct = catchAsync(async (req, res, next) => {
   if (!updateProduct) {
     return next(new AppError("Khong co Id san pham de update", 404));
   }
+
   res.status(200).json({
     status: "Success",
     data: {
@@ -53,6 +54,7 @@ exports.deleteOneProuduct = catchAsync(async (req, res, next) => {
       new AppError("Khong co doi tuong nao ton tai trong san pham de xoa", 404)
     );
   }
+
   res.status(200).json({
     status: "success",
     data: null,
@@ -61,8 +63,8 @@ exports.deleteOneProuduct = catchAsync(async (req, res, next) => {
 
 exports.getAllProduct = catchAsync(async (req, res, next) => {
   const getAllProduct = await Product.find().populate(
-    "productCreater category",
-    "firstName lastName nameCategory "
+    "category",
+    "nameCategory parent"
   );
   res.status(200).json({
     status: "succes",
@@ -74,8 +76,8 @@ exports.getAllProduct = catchAsync(async (req, res, next) => {
 
 exports.getOneProduct = catchAsync(async (req, res, next) => {
   const getOneProduct = await Product.findById(req.params.id).populate(
-    "productCreater category",
-    "firstName lastName nameCategory "
+    "category",
+    "nameCategory parentId"
   );
   if (!getOneProduct) {
     return next(new AppError("Khong tim thay Id san pham nay ", 404));

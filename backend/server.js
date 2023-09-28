@@ -4,7 +4,7 @@ const dbConnect = require("./config/DBConfig");
 const productRouter = require("./Router/productRouter");
 const categoryRouter = require("./Router/categoryRouter");
 const userRouter = require("./Router/userRouter");
-const cartRouter = require("./Router/cartRouter");
+const cartRouter = require("./Router/orderRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/category", categoryRouter);
-app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/order", cartRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

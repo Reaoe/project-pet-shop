@@ -12,5 +12,6 @@ Router.route("/:id")
   .get(userController.getOneUser)
   .patch(upload.single("image"), userController.updateInformationUser)
   .delete(userController.deleteUser);
+Router.patch("/update-role/:id", authController.updateRole);
 Router.get("/", userController.getAllUser);
 module.exports = Router;

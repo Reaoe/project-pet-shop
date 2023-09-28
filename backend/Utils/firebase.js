@@ -10,7 +10,7 @@ firebase.initializeApp(configFireBase);
 const storage = getStorage();
 
 const getLinkURL = async (file, name = "") => {
-  file.originalname = `proudct-${name}-${Date.now()}.jpeg`;
+  file.originalname = `photo-${name}-${Date.now()}.jpeg`;
 
   const storageRef = ref(storage, "image/" + file.originalname);
 

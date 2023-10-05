@@ -48,14 +48,10 @@ const Login = () => {
             setErrors(response.data.error);
           } else {
             localStorage.setItem('login', JSON.stringify(response.data));
+            navigate('/');
           }
         });
       localStorage.setItem('kt', JSON.stringify(kt));
-    }
-    if (kt === 'true') {
-      navigate('/');
-    } else {
-      navigate('/login');
     }
   }
   function renderError() {

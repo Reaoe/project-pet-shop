@@ -12,6 +12,8 @@ import {
   AiFillCaretUp,
   AiOutlineDashboard,
   AiOutlineDown,
+  AiFillMinusCircle,
+  AiFillPlusCircle,
 } from 'react-icons/ai';
 import {
   BsTelephone,
@@ -22,7 +24,7 @@ import {
 import { IoIosMail } from 'react-icons/io';
 import { ImProfile } from 'react-icons/im';
 import { MdGroups } from 'react-icons/md';
-import { TbBrandProducthunt } from 'react-icons/tb';
+import { TbBrandProducthunt, TbCategory2 } from 'react-icons/tb';
 import { RiBillLine } from 'react-icons/ri';
 
 const icons = {
@@ -46,5 +48,8 @@ const icons = {
   TbBrandProducthunt,
   RiBillLine,
   AiOutlineDown,
+  AiFillMinusCircle,
+  AiFillPlusCircle,
+  TbCategory2,
 };
 export default icons;

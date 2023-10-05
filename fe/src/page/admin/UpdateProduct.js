@@ -1,23 +1,22 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
-import axios, { Axios } from 'axios';
-
-const CreateProduct = () => {
-  const [dataCategory, setDataCategory] = useState([]);
+const UpdateProduct = ({ editProduct, render }) => {
+  console.log(editProduct);
   const [dataCategoryChild, setDataCategoryChild] = useState([]);
-  const [errors, setErrors] = useState({});
+  const [dataCategory, setDataCategory] = useState([]);
   const [categoryID, setDataCategoryID] = useState();
-  const [input, setInput] = useState({
-    nameProduct: '',
-    category: '',
-    brand: '',
-    price: '',
-    quantity: '',
-    decription: '',
-    img: '',
-  });
+  const [errors, setErrors] = useState({});
 
+  const [input, setInput] = useState({
+    nameProduct: editProduct.productName,
+    category: editProduct.category.nameCategory,
+    price: editProduct.price,
+    quantity: editProduct.stockQuantity,
+    decription: editProduct.description,
+    img: editProduct.image,
+  });
   useEffect(() => {
     axios
       .get('http://localhost:8080/api/v1/category/parent-category')
@@ -28,19 +27,16 @@ const CreateProduct = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  //input
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInput((state) => ({ ...state, [name]: value }));
   };
-  //
   const handleOptions = () => {
     return dataCategory?.map((item) => {
       return <option key={item.id}>{item.nameCategory}</option>;
     });
   };
-
   const optionID = (event) => {
     const selectID = dataCategory.find(
       (item) => item.nameCategory === event.target.value
@@ -57,7 +53,6 @@ const CreateProduct = () => {
         })
         .catch((error) => console.log(error));
     }
-    // setid(selectID);
   };
   const optionIDChild = (event) => {
     const selectIDChild = dataCategoryChild.find(
@@ -69,20 +64,15 @@ const CreateProduct = () => {
       setDataCategoryID(id);
     }
   };
-  //
-  // console.log(dataCategoryChild);
   const handleOptionsChild = () => {
     return dataCategoryChild?.map((item) => {
       return <option key={item.id}>{item.nameCategory}</option>;
     });
   };
-  //file
   const [getFile, setFile] = useState({});
   const handlfile = (e) => {
     setFile(e.target.files);
   };
-
-  //submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     let errorSubmit = {};
@@ -151,10 +141,11 @@ const CreateProduct = () => {
     }
   };
   return (
-    <div className="w-full">
-      <h1 className="h-[75px] flex justify-between items-center text-3xl font-bold p-4 border-b">
-        <span>Create New Product</span>
-      </h1>
+    <div className="w-full flex flex-col gap-4 relative">
+      <div className="h-[69px] w-full"></div>
+      <div className="p-4 border-b w-full bg-gray-100 flex justify-between items-center fixed top-0">
+        <h1 className="text-3xl font-bold tracking-tight">Update Product </h1>
+      </div>
       <div className="p-4">
         <form enctype="multipart/form-data" onSubmit={handleSubmit}>
           <div className="flex flex-col h-[78px] gap-2">
@@ -209,6 +200,7 @@ const CreateProduct = () => {
               <select
                 id="brand"
                 onChange={optionIDChild}
+                // value={input.category.nameCategory}
                 className="flex-auto bg-[#fff] border-[#6b7280] border-[1px] px-2 py-3 text-base w-full"
               >
                 <option>-----CHOOSE------</option>
@@ -249,4 +241,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;

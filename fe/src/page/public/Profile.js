@@ -1,9 +1,19 @@
 import React from 'react';
 import icons from '../../ultils/icons';
+import { useNavigate } from 'react-router-dom';
 
 const { ImProfile } = icons;
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  var B = localStorage.getItem('kt');
+
+  const logout = () => {
+    localStorage.removeItem('kt');
+    console.log(B);
+    navigate('/login');
+  };
   return (
     <div className="w-[92%] mx-auto flex p-5 ">
       <div className="w-1/4 flex flex-col gap-y-3">
@@ -19,8 +29,11 @@ const Profile = () => {
         <h2>Hồ sơ</h2>
         <h2>Địa Chỉ</h2>
         <h2>Đổi mật khẩu</h2>
+        <h2 onClick={logout} className="cursor-pointer">
+          Đăng Xuất
+        </h2>
       </div>
-      <div className="w-[90%] mx-auto flex flex-col mr-40 border-2 p-2">
+      {/* <div className="w-[90%] mx-auto flex flex-col mr-40 border-2 p-2">
         <div className="w-full p-5 border-b-2">
           <h1 className="text-2xl font-extrabold">Hồ Sơ Của Tôi</h1>
           <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
@@ -51,7 +64,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

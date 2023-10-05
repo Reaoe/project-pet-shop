@@ -1,12 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { QuantityContext } from '../../Context/QuantityContext';
 import { Sidebar } from '../../component';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import icons from '../../ultils/icons';
+const { AiFillPlusCircle, AiFillMinusCircle } = icons;
 
 const Details = () => {
+  const context = useContext(QuantityContext);
+  console.log(context.idProduct);
+
   const params = useParams();
-  // console.log(params);
+  console.log(params.id);
   const [data, setData] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(0);
+
+  const handleMimus = () => {
+    if (quantity === 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
+  const handlePlus = () => {
+    setQuantity(quantity + 1);
+  };
+  const handleAdd = () => {
+    setTotal(quantity + total);
+    setQuantity(1);
+    const productCart = {};
+    productCart['id'] = params.id;
+    productCart['quantity'] = quantity;
+    console.log(productCart);
+    var newProductCart = {};
+    var updateProductCart = localStorage.getItem('productcart');
+    if (updateProductCart) {
+      newProductCart = JSON.parse(updateProductCart);
+    }
+    newProductCart[params.id] = productCart;
+    localStorage.setItem('productcart', JSON.stringify(newProductCart));
+
+    // localStorage.setItem('idProduct', JSON.stringify(params.id));
+    // localStorage.setItem('quantity', JSON.stringify(quantity));
+    // localStorage.removeItem('idProduct');
+    // localStorage.removeItem('productcart');
+  };
 
   useEffect(() => {
     axios
@@ -35,19 +74,21 @@ const Details = () => {
             <p className="text-blue-500 text-xl font-bold">{data.price}</p>
             <span className="text-blue-500">đ</span>
           </div>
-          <div className="flex justify-start gap-2">
-            <p>Số Lượng:</p>
-            <input
-              type="text"
-              value={1}
-              className="w-6 h-6 flex justify-center items-center"
-            />
-            <div>
-              <button>{'<'}</button>
-              <button>{'>'}</button>
-            </div>
+          <div className="flex justify-start gap-4">
+            <p className="pr-6">Số Lượng:</p>
+            <button className="text-xl" onClick={handleMimus}>
+              <AiFillMinusCircle />
+            </button>
+            <span>{quantity}</span>
+            <button className="text-xl" onClick={handlePlus}>
+              <AiFillPlusCircle />
+            </button>
+            <div></div>
           </div>
-          <button className="w-[184px] bg-while px-4 py-2 rounded-xl border-dashed border-2 border-blue-400 hover:bg-blue-400 hover:text-white">
+          <button
+            onClick={handleAdd}
+            className="w-[184px] bg-while px-4 py-2 rounded-xl border-dashed border-2 border-blue-400 hover:bg-blue-400 hover:text-white"
+          >
             Thêm vào giỏ hàng
           </button>
         </div>

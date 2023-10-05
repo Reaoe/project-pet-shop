@@ -1,6 +1,7 @@
 import './App.css';
 import {
   AdminLayout,
+  CreateCategory,
   CreateProduct,
   Dashboard,
   ManageOrder,
@@ -41,6 +42,7 @@ function App() {
           <Route path={path.MANAGE_PRODUCT} element={<ManageProduct />} />
           <Route path={path.MANAGE_USER} element={<ManageUser />} />
           <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
+          <Route path={path.CREATE_CATEGORY} element={<CreateCategory />} />
         </Route>
 
         <Route path={path.CART} element={<Cart />} />

@@ -41,7 +41,7 @@ const AdminSidebar = () => {
                 onClick={() => handleShowTabs(item.id)}
                 className="flex flex-col "
               >
-                <div className="px-4 py-2 flex items-center justify-between  hover:bg-gray-600 cursor-pointer">
+                <div className="px-4 py-2 flex items-center justify-between  hover:bg-gray-600 cursor-pointer ">
                   <div className="flex items-center gap-2">
                     <span>{item.icons}</span>
                     <span>{item.text}</span>

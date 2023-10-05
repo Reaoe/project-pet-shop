@@ -1,4 +1,9 @@
-export { default as Header } from '../component/header';
+export { default as Header } from '../component/Header';
 export { default as Footer } from '../component/Footer';
 export { default as Sidebar } from '../component/Sidebar';
 export { default as AdminSidebar } from '../component/AdminSidebar';
+export { default as InputForm } from '../component/InputForm';
+export { default as Select } from '../component/Select';
+export { default as LoadingSkeleton } from './Loading/LoadingSkeleton';
+export { default as Description } from '../component/Description';
+export { default as UploadImg } from '../component/UploadImg';

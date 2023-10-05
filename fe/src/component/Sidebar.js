@@ -1,76 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import axios from 'axios';
+import { QuantityContext } from '../Context/QuantityContext';
 
-// const data = [
-// {
-//   id: 1,
-//   name: 'cho',
-
-// },
-//   {
-//     id: 2,
-//     name: 'Cát vệ sinh',
-//   },
-//   {
-//     id: 3,
-//     name: 'Chuồng',
-//   },
-//   {
-//     id: 4,
-//     name: 'Chó Alsaka Malamute',
-//   },
-//   {
-//     id: 5,
-//     name: 'Chó Bichon',
-//   },
-//   {
-//     id: 6,
-//     name: 'Cho Corgi',
-//   },
-//   {
-//     id: 7,
-//     name: 'Mèo chân ngắn',
-//   },
-//   {
-//     id: 8,
-//     name: 'Mèo tai cụp',
-//   },
-// ];
 const Sidebar = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get('http://localhost:8080/api/v1/category')
-      .then((response) => {
-        setData(response.data.data.data);
-        console.log(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-  // const fetchCategories = async () => {
-  //   const response = await apiGetCategories();
-  //   console.log(response.data);
-  // };
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, []);
+  const context = useContext(QuantityContext);
+
   return (
     <div className="w-full flex flex-col justify-start gap-5">
       <h1 className="font-semibold text-3xl text-blue-500">
         Danh mục sản phẩm
       </h1>
       <div className="flex flex-col gap-2 px-8">
-        {data.map((item) => {
-          // console.log(item.parent.nameCategory);
-          // console.log(item.nameTypeCategory);
-          return (
-            <div className="" key={item.id}>
-              <p className="text-base hover:cursor-pointer">
-                {item.nameTypeCategory}
-              </p>
-            </div>
-          );
+        {context.MenuParent.map((item) => {
+          if (item.child && item.child.length > 0) {
+            return (
+              <div>
+                <p
+                  onClick={() => context.updateid(item._id)}
+                  className="text-base pb-2 hover:cursor-pointer hover:text-cyan-400 focus:text-cyan-400"
+                >
+                  {item.nameCategory}
+                </p>
+                {item.child.map((el) => {
+                  // console.log(el);
+                  return (
+                    <div className="pl-3 py-1">
+                      <p
+                        onClick={() => context.handleProductId(el._id)}
+                        className="hover:cursor-pointer"
+                      >
+                        {el.nameCategory}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <p
+                  onClick={() => context.updateid(item._id)}
+                  className="text-base pb-2 hover:cursor-pointer hover:text-cyan-400 focus:text-cyan-400"
+                >
+                  {item.nameCategory}
+                </p>
+                <p></p>
+              </div>
+            );
+          }
         })}
       </div>
     </div>

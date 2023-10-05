@@ -17,5 +17,9 @@ const path = {
   MANAGE_ORDER: 'manage-order',
   MANAGE_PRODUCT: 'manage-product',
   CREATE_PRODUCT: 'create-product',
+  MANAGE_CATEGORY: 'manage-category',
+  CREATE_CATEGORY: 'create-category',
+
+  //member
 };
 export default path;

@@ -4,7 +4,10 @@ const authController = require("../Controller/authController");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 const Router = express.Router();
-//authController.protect,
+Router.use(authController.protect);
+
+Router.use(authController.restrictTo("admin", "staff"));
+
 Router.route("/")
   .get(productController.getAllProduct)
   .post(upload.single("image"), productController.createProduct);

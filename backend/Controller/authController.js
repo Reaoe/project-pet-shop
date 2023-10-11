@@ -70,7 +70,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // Xác thực Token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
   //Kiểm tra xem user có tồn tại không
   const currentUser = await User.findById(decoded.id);
   if (!currentUser) {
@@ -79,13 +78,13 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
   req.user = currentUser;
-  req.locals.user = currentUser;
+  res.locals.user = currentUser;
   next();
 });
 
 exports.restrictTo = (...role) => {
   return (req, res, next) => {
-    if (!role.includes(req.body.role)) {
+    if (!role.includes(req.user.role)) {
       return next(
         new AppError("Bạn không có quyền thực hiện hành động này", 403)
       );

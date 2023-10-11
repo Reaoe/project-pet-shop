@@ -1,6 +1,11 @@
 const express = require("express");
 const categoryController = require("../Controller/categoryController");
+const authController = require("../Controller/authController");
 const Router = express.Router();
+
+Router.use(authController.protect);
+
+Router.use(authController.restrictTo("admin"));
 
 Router.route("/").post(categoryController.createCategory);
 Router.get("/parent-category", categoryController.getParentCategory);

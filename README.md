@@ -96,34 +96,36 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
  
 # Đặc tả cơ sở dữ liệu
 
-## Bảng: Khách hàng (KH SÀI)
 
-| Tên cột     | Kiểu dữ liệu | Mô tả             |
-|-------------|--------------|-------------------|
-| _id         | ObjectId     | id                |
-| FisrtName   | String       | Họ                |
-| LastName    | String       | Tên               |
-| Email       | String       | Địa chỉ gmail     |
-| Phone       | String       | Số điện thoại     |
-| Address     | String       | Địa chỉ           |
+
+## Bảng: Khách hàng (bỏ)
+
+| Tên cột   | Kiểu dữ liệu | Mô tả         |
+| --------- | ------------ | ------------- |
+| id        | ObjectId     | id            |
+| FisrtName | String       | Họ            |
+| LastName  | String       | Tên           |
+| Email     | String       | Địa chỉ gmail |
+| Phone     | String       | Số điện thoại |
+| Address   | String       | Địa chỉ       |
 
 ## Bảng: Thú cưng
 
-| Tên cột     | Kiểu dữ liệu | Mô tả                  |
-|-------------|--------------|------------------------|
-| ID          | ObjectId     | Id                     |
-| Name        | String       | Họ và tên              |
-| Species     | String       | Loại thú cưng          |
-| Breed       | String       | Tên gọi thông dụng     |
-| Age         | Number       | Tuổi                   |
-| Gender      | String       | Giống loài             |
-| CustomerID  | ObjectId     | Id khách hàng (references Khách Hàng) |
- 
+| Tên cột    | Kiểu dữ liệu | Mô tả                                 |
+| ---------- | ------------ | ------------------------------------- |
+| ID         | ObjectId     | Id                                    |
+| Name       | String       | ten pet                               |
+| Species    | String       | Loại thú cưng                         |
+| Breed      | String       | Tên khoa hoc                          |
+| Age        | Number       | Tuổi                                  |
+| Gender     | String       | Giống loài                            |
+| CustomerID | ObjectId     | Id khách hàng (references Khách Hàng) |
+| imgae      | string       | ảnh                                   |
 
 # Bảng: Dịch Vụ
 
 | Tên cột     | Kiểu dữ liệu | Mô tả       |
-|-------------|--------------|-------------|
+| ----------- | ------------ | ----------- |
 | ID          | ObjectId     | id          |
 | ServiceName | String       | Tên dịch vụ |
 | Description | String       | Mô tả       |
@@ -131,110 +133,111 @@ MongoDB NoSQL database cũng được áp dụng trong việc quản lý và ph�
 
 # Bảng: Đặt Lịch
 
-| Tên cột      | Kiểu dữ liệu                    | Mô tả                |
-|--------------|---------------------------------|----------------------|
-| ID           | ObjectId                        | id                   |
-| CustomerID   | ObjectId (references Khách hàng) | ID khách hàng        |
-| ServiceID    | ObjectId (references Dịch vụ)   | Id dịch vụ           |
-| PetID        | ObjectId (references Thú cưng)  | Id thú cưng          |
-| AppointmentDate | Date                         | Ngày hẹn             |
-| Status       | String                          | Trạng thái           |
-
+| Tên cột         | Kiểu dữ liệu                   | Mô tả         |
+| --------------- | ------------------------------ | ------------- |
+| ID              | ObjectId                       | id            |
+| CustomerID      | ObjectId (references User)     | ID khách hàng |
+| ServiceID       | ObjectId (references Dịch vụ)  | Id dịch vụ    |
+| PetID           | ObjectId (references Thú cưng) | Id thú cưng   |
+| AppointmentDate | Date                           | Ngày hẹn      |
+| Status          | String                         | Trạng thái    |
 
 # Bảng: Sản Phẩm
 
-| Tên cột        | Kiểu dữ liệu                    | Mô tả          |
-|----------------|---------------------------------|----------------|
-| ID             | ObjectId                        | ID Sản phẩm    |
-| ProductName    | ObjectId (references Customers) | Tên Sản Phẩm   |
-| Description    | String                          | Mô Tả          |
-| Category       | String                          | Loại           |
-| Price          | Double                          | Giá Tiền       |
-| StockQuantity  | Int                             | Số Lượng       |
-| Supplier       | String                          | Nhà cung cấp   |
+| Tên cột        | Kiểu dữ liệu               | Mô tả         |
+| -------------- | -------------------------- | ------------- |
+| ID             | ObjectId                   | ID Sản phẩm   |
+| ProductName    | String                     | Tên Sản Phẩm  |
+| ProductCreater | ObjectId (references User) | Tên người tạo |
+| Description    | String                     | Mô Tả         |
+| Category       | String                     | Loại          |
+| Price          | Double                     | Giá Tiền      |
+| StockQuantity  | Number                     | Số Lượng      |
+| imgae          | string                     | ảnh           |
 
+# Bảng: Hóa đơn sản phẩm
 
-# Bảng: Hoá Đơn
+| Tên cột     | Kiểu dữ liệu                                          | Mô tả         |
+| ----------- | ----------------------------------------------------- | ------------- |
+| ID          | ObjectId                                              | ID Hoá Đơn    |
+| CustomerID  | ObjectId (references Customers)                       | ID Khách Hàng |
+| ProductID   | Array [ProductID: ObjectId(ref Products)] ID sản phẩm |               |
+| SL          | Array [number]                                        | số lượng      |
+| Status      | Number                                                | Trạng thái    |
+| TotalPrice  | Double                                                | Tổng tiền     |
+| InvoiceDate | dateTime                                              | Ngày Hoá Đơn  |
 
-| Tên cột          | Kiểu dữ liệu                  | Mô tả              |
-|------------------|-------------------------------|--------------------|
-| ID               | ObjectId                      | ID Hoá Đơn         |
-| CustomerID       | ObjectId (references Customers)| ID Khách Hàng      |
-| InvoiceItems     | ProductID: ObjectId(ref Products), Quantity: int, UnitPrice: Double | Mặt hàng hoá đơn, Số lượng, Đơn giá |
-|                  | ServiceItems: "ServiceID": ObjectId (references Services), Quantity: int, UnitPrice: double | Dịch vụ hoá đơn, Số lượng, Đơn giá |
-| Payment Method   | string                        | Phương thức thanh toán |
-| InvoiceDate      | dateTime                      | Ngày Hoá Đơn       |
+# Bảng: Hóa đơn dịch vụ
+
+| Tên cột     | Kiểu dữ liệu                      | Mô tả         |
+| ----------- | --------------------------------- | ------------- |
+| ID          | ObjectId                          | ID Hoá Đơn    |
+| CustomerID  | ObjectId (references Customers)   | ID Khách Hàng |
+| ProductID   | ProductID: ObjectId(ref Products) |               |
+| TotalPrice  | Double                            | Tổng tiền     |
+| Status      | Number                            | Trạng thái    |
+| InvoiceDate | dateTime                          | Ngày Hoá Đơn  |
+
+# Bảng: Đơn hàng
+
+| Tên cột     | Kiểu dữ liệu                      | Mô tả         |
+| ----------- | --------------------------------- | ------------- |
+| ID          | ObjectId                          | ID Đơn hàng   |
+| CustomerID  | ObjectId (references Customers)   | ID Khách Hàng |
+| ProductID   | ProductID: ObjectId(ref Products) | ID Sản phẩm   |
+| TotalPrice  | Double                            | Tổng tiền     |
+| Status      | Number                            | Trạng thái    |
+| InvoiceDate | dateTime                          | Ngày mua      |
+| descriton   | String                            | Mô tả         |
 
 # Bảng: USER
 
-| Tên cột       | Kiểu dữ liệu  | Mô tả       |
-|---------------|---------------|-------------|
-| ID            | ObjectID      | Id          |
-| NAME          | string        | Họ và tên  |
-| CHUCVU        | string        | Chức vụ     |
-| PHONE NUMBER           | number        | Số điện thoại |
-| ROLE      | number        | Quyền hạn   |
-| BIRTHDAY      | string        | Ngày sinh   |
-| LOCATION        | string        | Địa chỉ     |
-| HONETOWN      | string        | Quê quán    |
-| EMAIL         | string        | Email       |
-| USERNAME   | string        | Tên đăng nhập |
-| PASSWORD       | string        | Mật khẩu    |
+| Tên cột      | Kiểu dữ liệu | Mô tả         |
+| ------------ | ------------ | ------------- |
+| ID           | ObjectID     | Id            |
+| NAME         | string       | Họ và tên     |
+| PHONE NUMBER | string       | Số điện thoại |
+| ROLE         | string       | Quyền hạn     |
+| LOCATION     | string       | Địa chỉ       |
+| HONETOWN     | string       | Quê quán      |
+| EMAIL        | string       | Email         |
+| PASSWORD     | string       | Mật khẩu      |
 
-# Bảng: Role
+# Bảng: Kho (bỏ)
 
-| Tên cột       | Kiểu dữ liệu  | Mô tả       |
-|---------------|---------------|-------------|
-| ID            | ObjectID      | Id  Role    |
-| Name Role     | string        | Tên role    |
-
-
-Check ( bỏ ) bảng lịch làm việc
-
-
-# Bảng: Kho
-
-| Tên cột          | Kiểu dữ liệu  | Mô tả                    |
-|------------------|---------------|--------------------------|
-| ID               | ObjectID      | id                       |
-| ItemName         | String        | Tên mặt hàng             |
-| Description      | String        | Mô tả                    |
-| Quantity         | int           | Số Lượng                 |
-| UnitPrice        | double        | Giá Tiền                 |
-| Supplier         | string        | Nhà cung cấp             |
-| LastRestocked    | dataTime      | Thời điểm nhập hàng gần nhất |
-
+| Tên cột       | Kiểu dữ liệu | Mô tả                        |
+| ------------- | ------------ | ---------------------------- |
+| ID            | ObjectID     | id                           |
+| ItemName      | String       | Tên mặt hàng                 |
+| Description   | String       | Mô tả                        |
+| Quantity      | int          | Số Lượng                     |
+| UnitPrice     | double       | Giá Tiền                     |
+| Supplier      | string       | Nhà cung cấp                 |
+| LastRestocked | dataTime     | Thời điểm nhập hàng gần nhất |
 
 # Bảng: Đánh Giá Từ Người Dùng
 
-| Tên cột      | Kiểu dữ liệu                    | Mô tả           |
-|--------------|---------------------------------|-----------------|
-| ID           | ObjectID                        | id              |
-| CustomerID   | ObjectId (references Customers) | ID Khách Hàng   |
-| Rating       | int                             | Số Sao          |
-| Comment      | string                          | Đánh Giá        |
-| ReviewDate   | datetime                        | Ngày gửi đánh giá |
+| Tên cột    | Kiểu dữ liệu                    | Mô tả             |
+| ---------- | ------------------------------- | ----------------- |
+| ID         | ObjectID                        | id                |
+| CustomerID | ObjectId (references Customers) | ID Khách Hàng     |
+| ProductID  | ObjectId (references san phẩm)  | ID sản phẩm       |
+| Rating     | Number                          | Số Sao            |
+| Comment    | string                          | Đánh Giá          |
+| ReviewDate | datetime                        | Ngày gửi đánh giá |
 
-# Bảng: Khuyến mãi
+# Bảng: Khuyến mãi(xử lý sau)
 
-| Tên cột            | Kiểu dữ liệu  | Mô tả                    |
-|--------------------|---------------|--------------------------|
-| ID                 | ObjectID      | id                       |
-| PromotionName      | string        | Tên khuyến mãi           |
-| Description        | string        | Mô tả                    |
-| DiscountPercentage | double        | Phần trăm khuyến mãi     |
-| StartDate          | datetime      | Ngày bắt đầu             |
-| EndDate            | datetime      | Ngày Kết Thúc            |
+| Tên cột            | Kiểu dữ liệu | Mô tả                |
+| ------------------ | ------------ | -------------------- |
+| ID                 | ObjectID     | id                   |
+| PromotionName      | string       | Tên khuyến mãi       |
+| Description        | string       | Mô tả                |
+| DiscountPercentage | double       | Phần trăm khuyến mãi |
+| StartDate          | date         | Ngày bắt đầu         |
+| EndDate            | datet        | Ngày Kết Thúc        |
 
-# Bảng: Sự Kiện ( KH SÀI )
 
-| Tên cột      | Kiểu dữ liệu  | Mô tả            |
-|--------------|---------------|------------------|
-| ID           | ObjectID      | id               |
-| EventName    | string        | Tên Sự Kiện      |
-| Description  | string        | Mô tả            |
-| EventDate    | double        | Ngày Diễn Ra     |
-| Location     | string        | Địa Điểm         |
 
 
 

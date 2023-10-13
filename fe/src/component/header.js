@@ -14,7 +14,14 @@ const Header = () => {
   if (quantity) {
     quantity = JSON.parse(quantity);
   }
-  var ArrayQuantity = Object.values(quantity);
+
+  var ArrayQuantity;
+
+  if (quantity && Object.keys(quantity).length > 0) {
+    ArrayQuantity = Object.values(quantity);
+  } else {
+    ArrayQuantity = [0];
+  }
   // console.log(ArrayQuantity.length);
   var A = localStorage.getItem('kt');
   const renderLogin = () => {

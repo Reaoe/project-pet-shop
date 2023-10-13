@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import icons from '../../ultils/icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import path from '../../ultils/path';
 
 const { ImProfile } = icons;
 
@@ -13,6 +15,32 @@ const Profile = () => {
     localStorage.removeItem('kt');
     console.log(B);
     navigate('/login');
+  };
+  var idLogin = localStorage.getItem('login');
+  if (idLogin) {
+    idLogin = JSON.parse(idLogin);
+  }
+  var role = idLogin.data.user.role;
+  var id = idLogin.data.user._id;
+  console.log(typeof role);
+  const [dataUser, setDataUser] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/v1/users/${id}`).then((response) => {
+      console.log(response);
+    });
+  });
+
+  const checkRole = () => {
+    if (role === 'admin') {
+      return (
+        <>
+          <Link to={path.ADMIN}>
+            <h2>Admin</h2>;
+          </Link>
+        </>
+      );
+    } else return <h2>user</h2>;
   };
   return (
     <div className="w-[92%] mx-auto flex p-5 ">
@@ -32,8 +60,9 @@ const Profile = () => {
         <h2 onClick={logout} className="cursor-pointer">
           Đăng Xuất
         </h2>
+        <h2>{checkRole()}</h2>
       </div>
-      {/* <div className="w-[90%] mx-auto flex flex-col mr-40 border-2 p-2">
+      <div className="w-[90%] mx-auto flex flex-col mr-40 border-2 p-2">
         <div className="w-full p-5 border-b-2">
           <h1 className="text-2xl font-extrabold">Hồ Sơ Của Tôi</h1>
           <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
@@ -64,7 +93,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

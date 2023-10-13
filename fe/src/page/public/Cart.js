@@ -14,8 +14,15 @@ const Cart = () => {
     productCart = JSON.parse(productCart);
     // console.log(productCart);
   }
-  const ArrayProductCart = Object.values(productCart);
-  console.log(ArrayProductCart.length);
+
+  var ArrayProductCart;
+
+  if (productCart && Object.keys(productCart).length > 0) {
+    ArrayProductCart = Object.values(productCart);
+  } else {
+    ArrayProductCart = [0];
+  }
+
   const [dataProduct, setDataProduct] = useState([]);
   useEffect(() => {
     axios
@@ -37,21 +44,25 @@ const Cart = () => {
       localStorage.setItem('productcart', JSON.stringify(productCart));
     }
   };
+
   /// thành tiền
   const rederMoney = () => {
-    let quantity, price, money;
+    let quantity,
+      price,
+      money = 0;
     dataProduct.map((item) => {
       ArrayProductCart.map((el) => {
         if (item._id === el.id) {
           quantity = el.quantity;
           price = item.price;
           money = quantity * price;
-          // console.log(money);
-          // return money;
+          money += money;
         }
-        money += money;
+
+        // console.log(money);
       });
     });
+    //
     return money;
   };
 
@@ -77,6 +88,7 @@ const Cart = () => {
           {dataProduct.map((item) => {
             return ArrayProductCart.map((el) => {
               if (item._id === el.id) {
+                // console.log(formatCash(item.price));
                 return (
                   <>
                     <div className=" grid grid-cols-5 items-center justify-center border-2 rounded-md">
@@ -90,10 +102,6 @@ const Cart = () => {
                       </div>
                       <div className="flex flex-row justify-center items-center gap-2">
                         <p>{el.quantity}</p>
-                        <div className="hover:cursor-pointer">
-                          <AiFillCaretUp />
-                          <AiFillCaretDown />
-                        </div>
                       </div>
                       <p>
                         {item.price}

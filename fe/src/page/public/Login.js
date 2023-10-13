@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import path from '../../ultils/path';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const kt = ['true'];
@@ -13,24 +15,38 @@ const Login = () => {
     password: '',
   });
   const [errors, setErrors] = useState({});
+  const [check, setCheck] = useState(false);
 
   function handleInput(e) {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((state) => ({ ...state, [name]: value }));
   }
-
+  const handleCheckbox = (e) => {
+    console.log(e.target.checked);
+    setCheck(e.target.checked);
+  };
   function handleSubmit(e) {
     e.preventDefault();
     let errorsSubmit = [];
     let flag = true;
 
     if (inputs.email === '') {
-      errorsSubmit.email = 'Vui lòng nhập email';
+      // errorsSubmit.email = 'Vui lòng nhập email';
+      toast.error('Email chưa được nhập');
       flag = false;
     }
+    
     if (inputs.password === '') {
-      errorsSubmit.password = 'Vui lòng nhập mật khẩu';
+      // errorsSubmit.password = 'Vui lòng nhập mật khẩu';
+      toast.error('Mật Khẩu chưa được nhập');
+
+      flag = false;
+    }
+    if (!check) {
+      // errorsSubmit.check = 'Vui lòng nhập check';
+      toast.error('Bạn chưa đồng ý với Điều khoản');
+
       flag = false;
     }
     if (!flag) {
@@ -44,6 +60,9 @@ const Login = () => {
       axios
         .post('http://localhost:8080/api/v1/users/login', data)
         .then((response) => {
+          if (response.status === 201) {
+            Swal.fire('Successful!', '', 'success');
+          }
           if (response.data.error) {
             setErrors(response.data.error);
           } else {
@@ -110,7 +129,11 @@ const Login = () => {
 
             <div className="w-full flex items-center justify-between">
               <div className="w-full flex items-center">
-                <input type="checkbox" className="w-4 h-4 mr-2" />
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 mr-2"
+                  onChange={handleCheckbox}
+                />
                 <p className="text-sm">Remember Me for 30 days</p>
               </div>
               <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">

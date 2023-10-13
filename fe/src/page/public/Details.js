@@ -74,6 +74,7 @@ const Details = () => {
             <p className="text-blue-500 text-xl font-bold">{data.price}</p>
             <span className="text-blue-500">đ</span>
           </div>
+          <p>{data.description}</p>
           <div className="flex justify-start gap-4">
             <p className="pr-6">Số Lượng:</p>
             <button className="text-xl" onClick={handleMimus}>

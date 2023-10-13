@@ -2,29 +2,58 @@ import React, { useState } from 'react';
 import nen from '../../img/nen.jpg';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
   });
+  const [check, setCheck] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(null);
   function handleInput(e) {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((state) => ({ ...state, [name]: value }));
   }
+  const handleCheckbox = (e) => {
+    console.log(e.target.checked);
+    setCheck(e.target.checked);
+  };
+
+  // const regex =
+  //   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // console.log(regex.test(inputs.email));
+
+  // console.log($('#email').on('input', validate))
+
   function handleSubmit(e) {
     e.preventDefault();
     let errorsSubmit = {};
     let flag = true;
 
     if (inputs.email === '') {
-      errorsSubmit.email = 'Vui lòng nhập email';
+      // errorsSubmit.email = 'Vui lòng nhập email';
+      toast.error('Email chưa được nhập');
+      flag = false;
+    }
+    const regex =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (inputs.email !== '' && regex.test(inputs.email) === false) {
+      toast.error('Email không đúng định dạng');
       flag = false;
     }
     if (inputs.password === '') {
-      errorsSubmit.password = 'Vui lòng nhập Mật Khẩu';
+      // errorsSubmit.password = 'Vui lòng nhập Mật Khẩu';
+      toast.error('Mật Khẩu chưa được nhập');
+      flag = false;
+    }
+    if (!check) {
+      // errorsSubmit.check = 'Vui lòng nhập check';
+      toast.error('Bạn chưa đồng ý với Điều khoản');
+
       flag = false;
     }
 
@@ -39,6 +68,9 @@ const Register = () => {
       axios
         .post('http://localhost:8080/api/v1/users/signup', data)
         .then((res) => {
+          if (res.status === 201) {
+            Swal.fire('Successful!', '', 'success');
+          }
           if (res.data.errors) {
             setErrors(res.data.errors);
           } else {
@@ -99,7 +131,11 @@ const Register = () => {
 
             <div className="w-full flex items-center justify-between">
               <div className="w-full flex items-center">
-                <input type="checkbox" className="w-4 h-4 mr-2" />
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 mr-2"
+                  onChange={handleCheckbox}
+                />
                 <p className="text-sm">
                   I agree to the Terms and Conditions of Pet Shop
                 </p>
@@ -119,14 +155,14 @@ const Register = () => {
               </Link>
             </div>
           </form>
-          <div className="w-full flex items-center justify-center">
+          {/* <div className="w-full flex items-center justify-center">
             <p className="text-sm font-normal text-[#060606]">
               Dont have account?
               <span className="font-semibold underline underline-offset-2 cursor-pointer">
                 Sign up for free
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="relative w-1/2 h-full flex flex-col">

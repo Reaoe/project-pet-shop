@@ -33,13 +33,13 @@ const ManageProduct = () => {
     setUpdateProduct(!updateProduct);
   });
   return (
-    <div className="w-full flex flex-col gap-4 relative">
+    <div className="w-full flex flex-col gap-4 ">
       {editProduct && (
         <div className="absolute inset-0 min-h-screen bg-gray-100 z-50">
           <UpdateProduct editProduct={editProduct} render={render} />
         </div>
       )}
-      <div className="h-[69px] w-full"></div>
+      <div className="h-[69px] w-full "></div>
       <div className="p-4 border-b w-full bg-gray-100 flex justify-between items-center fixed top-0">
         <h1 className="text-3xl font-bold tracking-tight">Manage Product</h1>
       </div>
@@ -52,7 +52,7 @@ const ManageProduct = () => {
             <th className="text-center py-2">category</th>
             <th className="text-center py-2">price</th>
             <th className="text-center py-2">quantity</th>
-            <th className="text-center py-2">decription</th>
+            {/* <th className="text-center py-2">decription</th> */}
             <th className="text-center py-2">Acitons</th>
           </tr>
         </thead>
@@ -62,11 +62,11 @@ const ManageProduct = () => {
             return (
               <tr key={el._id} className="border-b">
                 <td className="text-center py-2">{idx + 1}</td>
-                <td className="text-center py-2">
+                <td className="flex justify-center items-center py-2">
                   <img
                     src={el.image}
                     alt=""
-                    className="w-12 h-12 object-cover"
+                    className="w-12 h-12 object-cover "
                   />
                 </td>
                 <td className="text-center py-2">{el.productName}</td>
@@ -76,7 +76,7 @@ const ManageProduct = () => {
                 </td>
                 <td className="text-center py-2">{el.price}</td>
                 <td className="text-center py-2">{el.stockQuantity}</td>
-                <td className="text-center py-2">{el.description}</td>
+                {/* <td className="text-center py-2">{el.description}</td> */}
                 <td>
                   <span
                     onClick={() => setEditProduct(el)}

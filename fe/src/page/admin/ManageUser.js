@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { InputForm, Select } from '../../component';
 import { useForm } from 'react-hook-form';
 import { BlockStatus, roles } from '../../ultils/contact';
+import Swal from 'sweetalert2';
 
 const ManageUser = () => {
   const {
@@ -25,13 +26,29 @@ const ManageUser = () => {
       .get('http://localhost:8080/api/v1/users/')
       .then((response) => {
         setData(response.data.data.getAllUser);
-        console.log(response.data.data.getAllUser);
+        // console.log(response.data.data.getAllUser);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const handleID = (id) => {
-    axios.delete(`http://localhost:8080/api/v1/users/${id}`);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        axios.delete(`http://localhost:8080/api/v1/users/${id}`);
+        setTimeout(function () {
+          window.location.reload();
+        }, 5000);
+      }
+    });
   };
 
   const handleUpdate = (data) => {

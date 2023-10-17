@@ -23,7 +23,7 @@ const Sidebar = () => {
                   {item.nameCategory}
                 </p>
                 {item.child.map((el) => {
-                  // console.log(el);
+                  console.log(el);
                   return (
                     <div className="pl-3 py-1">
                       <p

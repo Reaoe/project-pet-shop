@@ -8,7 +8,7 @@ import CartLoading from './CartLoading';
 import { QuantityContext } from '../../Context/QuantityContext';
 const Product = () => {
   const context = useContext(QuantityContext);
-  console.log(context.idProduct);
+  console.log(context.idParent);
 
   const [Loading, setLoading] = useState(true);
   const [dataProduct, setDataProduct] = useState([]);
@@ -36,6 +36,8 @@ const Product = () => {
         <div className="grid grid-cols-3 gap-y-6 px-4 py-8">
           {!Loading &&
             dataProduct.map((item) => {
+              // console.log(context.idParent);
+              console.log(item.category.parent);
               if (context.idProduct === '' && context.idParent === '') {
                 return (
                   <Link to={`/${path.PRODUCT}/${item._id}`}>

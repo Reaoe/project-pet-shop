@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 const UpdateProduct = ({ editProduct, render }) => {
-  console.log(editProduct);
+  console.log(editProduct._id);
   const [dataCategoryChild, setDataCategoryChild] = useState([]);
   const [dataCategory, setDataCategory] = useState([]);
   const [categoryID, setDataCategoryID] = useState();
   const [errors, setErrors] = useState({});
+  const imgRef = useRef(null);
+  const [image, setImage] = useState('');
 
   const [input, setInput] = useState({
     nameProduct: editProduct.productName,
@@ -72,49 +75,65 @@ const UpdateProduct = ({ editProduct, render }) => {
   const [getFile, setFile] = useState({});
   const handlfile = (e) => {
     setFile(e.target.files);
+    setImage(e.target.files[0]);
   };
-  const handleSubmit = async (e) => {
+  const handleImgClick = () => {
+    imgRef.current.click();
+  };
+  const handleUpdate = async (e) => {
     e.preventDefault();
     let errorSubmit = {};
     let flag = true;
 
-    // if (input.nameProduct === '') {
-    //   errorSubmit.nameProduct = 'vui lòng nhập nameproduct';
-    //   flag = false;
-    // }
-    // if (input.category === '') {
-    //   errorSubmit.category = 'vui lòng nhập category';
-    //   flag = false;
-    // }
-    // if (input.brand === '') {
-    //   errorSubmit.brand = 'vui lòng nhập brand';
-    //   flag = false;
-    // }
-    // if (input.price === '') {
-    //   errorSubmit.price = 'vui lòng nhập price';
-    //   flag = false;
-    // }
-    // if (input.quantity === '') {
-    //   errorSubmit.quantity = 'vui long nhap quantity';
-    //   flag = false;
-    // }
-    // //xử lý file
-    // if (getFile === '') {
-    //   errorSubmit.img = 'vui lòng thêm file';
-    //   flag = false;
-    // } else {
-    //   let getSize = getFile[0]['size'];
-    //   let getType = getFile[0]['type'];
-    //   const duoi = ['png', 'jpg', 'qpeg', 'PNG', 'JPG'];
-    //   let tach = getType.split('/');
-    //   // console.log(tach[1]);
+    if (input.nameProduct === '') {
+      // errorSubmit.nameProduct = 'vui lòng nhập nameproduct';
+      toast.error('vui lòng nhập nameproduct');
 
-    //   if (getSize > 1024 * 1024) {
-    //     errorSubmit.avata = 'lỗi';
-    //   } else if (!duoi.includes(tach[1])) {
-    //     errorSubmit.avata = 'lỗi';
-    //   }
-    // }
+      flag = false;
+    }
+    if (input.category === '') {
+      // errorSubmit.category = 'vui lòng nhập category';
+      toast.error('vui lòng chọn category');
+
+      flag = false;
+    }
+    if (input.brand === '') {
+      // errorSubmit.brand = 'vui lòng nhập brand';
+      toast.error('vui lòng chọn brand');
+
+      flag = false;
+    }
+    if (input.price === '') {
+      toast.error('vui lòng nhập price');
+
+      // errorSubmit.price = 'vui lòng nhập price';
+      flag = false;
+    }
+    if (input.quantity === '') {
+      toast.error('vui lòng nhập quantity');
+
+      // errorSubmit.quantity = 'vui long nhap quantity';
+      flag = false;
+    }
+    //xử lý file
+    if (getFile === '') {
+      // errorSubmit.img = 'vui lòng thêm file';
+      toast.error('vui lòng thêm file');
+
+      flag = false;
+    } else {
+      let getSize = getFile[0]['size'];
+      let getType = getFile[0]['type'];
+      const duoi = ['png', 'jpg', 'qpeg', 'PNG', 'JPG'];
+      let tach = getType.split('/');
+      // console.log(tach[1]);
+
+      if (getSize > 1024 * 1024) {
+        errorSubmit.avata = 'lỗi';
+      } else if (!duoi.includes(tach[1])) {
+        errorSubmit.avata = 'lỗi';
+      }
+    }
     if (!flag) {
       setErrors({ errorSubmit });
     } else {
@@ -127,9 +146,13 @@ const UpdateProduct = ({ editProduct, render }) => {
       formData.append('image', getFile[0]);
 
       await axios
-        .post('http://localhost:8080/api/v1/product', formData)
+        .patch(
+          `http://localhost:8080/api/v1/product/${editProduct._id}`,
+          formData
+        )
         .then((res) => {
-          if (res.status === 201) {
+          // console.log(res);
+          if (res.status === 200) {
             Swal.fire('Successful!', '', 'success');
           }
           if (res.data.errors) {
@@ -147,7 +170,7 @@ const UpdateProduct = ({ editProduct, render }) => {
         <h1 className="text-3xl font-bold tracking-tight">Update Product </h1>
       </div>
       <div className="p-4">
-        <form enctype="multipart/form-data" onSubmit={handleSubmit}>
+        <form enctype="multipart/form-data" onSubmit={handleUpdate}>
           <div className="flex flex-col h-[78px] gap-2">
             <label>Name Product</label>
             <input
@@ -221,19 +244,37 @@ const UpdateProduct = ({ editProduct, render }) => {
             ></textarea>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4" onClick={handleImgClick}>
             <label>Upload Image</label>
+            {image ? (
+              <img
+                src={URL.createObjectURL(image)}
+                alt=""
+                className="w-[150px] object-cover"
+              />
+            ) : (
+              <img src={input.img} alt="" className="w-[150px] object-cover" />
+            )}
+            {/* <img src={input.img} alt="" className="w-[100px] object-cover" /> */}
             <input
               type="file"
+              ref={imgRef}
               onChange={handlfile}
               className="file:border-none file:rounded-full file:bg-blue-500 file:py-3 file:m-2 file:text-white file:px-6 file:hover:cursor-pointer"
+              style={{ display: 'none' }}
             />
+            {/* <div>
+              <img src={input.img} alt="" className="w-[100px] object-cover" />
+            </div> */}
+            <div>
+              <img src={getFile} alt="" className="w-[100px] object-cover" />
+            </div>
           </div>
           <button
             type="submit"
             className="px-2 py-3 bg-red-600 mt-6 rounded-lg text-white hover:bg-red-400 "
           >
-            Create new product
+            Update new product
           </button>
         </form>
       </div>

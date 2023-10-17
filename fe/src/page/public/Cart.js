@@ -46,24 +46,19 @@ const Cart = () => {
   };
 
   /// thành tiền
-  const rederMoney = () => {
-    let quantity,
-      price,
-      money = 0;
-    dataProduct.map((item) => {
-      ArrayProductCart.map((el) => {
-        if (item._id === el.id) {
-          quantity = el.quantity;
-          price = item.price;
-          money = quantity * price;
-          money += money;
-        }
+  const renderMoney = () => {
+    let totalMoney = 0; // Khởi tạo biến tổng tiền
 
-        // console.log(money);
-      });
+    ArrayProductCart.forEach((value, index) => {
+      const item = dataProduct.find((product) => product._id === value.id);
+
+      if (item) {
+        const totalPriceForProduct = item.price * value.quantity;
+        totalMoney += totalPriceForProduct;
+      }
     });
-    //
-    return money;
+
+    return totalMoney;
   };
 
   return (
@@ -88,7 +83,6 @@ const Cart = () => {
           {dataProduct.map((item) => {
             return ArrayProductCart.map((el) => {
               if (item._id === el.id) {
-                // console.log(formatCash(item.price));
                 return (
                   <>
                     <div className=" grid grid-cols-5 items-center justify-center border-2 rounded-md">
@@ -156,7 +150,7 @@ const Cart = () => {
               <h2>Tổng tiền cần thanh toán</h2>
 
               <p>
-                {rederMoney()}
+                {renderMoney()}
                 <span>đ</span>
               </p>
             </div>

@@ -33,7 +33,7 @@ const ManageProduct = () => {
     setUpdateProduct(!updateProduct);
   });
   return (
-    <div className="w-full flex flex-col gap-4 ">
+    <div className="w-full flex flex-col gap-4 relative">
       {editProduct && (
         <div className="absolute inset-0 min-h-screen bg-gray-100 z-50">
           <UpdateProduct editProduct={editProduct} render={render} />

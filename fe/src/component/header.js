@@ -6,22 +6,15 @@ import { Link, NavLink } from 'react-router-dom';
 import path from '../ultils/path';
 import { navigation } from '../ultils/contact';
 import avata from '../img/avata.png';
-import { QuantityContext } from '../Context/QuantityContext';
+// import { QuantityContext } from '../Context/QuantityContext';
 const { PiShoppingCartSimpleBold } = icons;
 
 const Header = () => {
-  var quantity = localStorage.getItem('productcart');
-  if (quantity) {
-    quantity = JSON.parse(quantity);
-  }
+  // var quantity = localStorage.getItem('productcart');
+  // if (quantity) {
+  //   quantity = JSON.parse(quantity);
+  // }
 
-  var ArrayQuantity;
-
-  if (quantity && Object.keys(quantity).length > 0) {
-    ArrayQuantity = Object.values(quantity);
-  } else {
-    ArrayQuantity = [0];
-  }
   // console.log(ArrayQuantity.length);
   var A = localStorage.getItem('kt');
   const renderLogin = () => {
@@ -68,9 +61,9 @@ const Header = () => {
             <i className="px-2 py-2 rounded-full border-2 border-sky-400  hover:text-blue-400 hover:cursor-pointer">
               <PiShoppingCartSimpleBold />
             </i>
-            <span className="absolute right-0 top-4 font-bold bg-white rounded-full">
-              {ArrayQuantity.length}
-            </span>
+            {/* <span className="absolute right-0 top-4 font-bold bg-white rounded-full">
+             
+            </span> */}
           </div>
         </Link>
         <div className="flex items-center">{renderLogin()}</div>

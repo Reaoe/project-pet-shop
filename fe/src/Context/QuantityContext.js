@@ -14,6 +14,7 @@ const QuantityProvider = ({ children }) => {
   const updateid = (id) => {
     setIdProduct('');
     setIdParent(id);
+    console.log(id);
 
     const fetchData = () => {
       axios
@@ -49,8 +50,8 @@ const QuantityProvider = ({ children }) => {
   const [idProduct, setIdProduct] = useState('');
   const handleProductId = (id) => {
     setIdParent('');
-    // console.log('idIdProduct', id);
     setIdProduct(id);
+    console.log('idIdProduct', id);
   };
   // value
   const value = {

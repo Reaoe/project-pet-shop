@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 import axios, { Axios } from 'axios';
 
@@ -88,43 +89,55 @@ const CreateProduct = () => {
     let errorSubmit = {};
     let flag = true;
 
-    // if (input.nameProduct === '') {
-    //   errorSubmit.nameProduct = 'vui lòng nhập nameproduct';
-    //   flag = false;
-    // }
-    // if (input.category === '') {
-    //   errorSubmit.category = 'vui lòng nhập category';
-    //   flag = false;
-    // }
-    // if (input.brand === '') {
-    //   errorSubmit.brand = 'vui lòng nhập brand';
-    //   flag = false;
-    // }
-    // if (input.price === '') {
-    //   errorSubmit.price = 'vui lòng nhập price';
-    //   flag = false;
-    // }
-    // if (input.quantity === '') {
-    //   errorSubmit.quantity = 'vui long nhap quantity';
-    //   flag = false;
-    // }
-    // //xử lý file
-    // if (getFile === '') {
-    //   errorSubmit.img = 'vui lòng thêm file';
-    //   flag = false;
-    // } else {
-    //   let getSize = getFile[0]['size'];
-    //   let getType = getFile[0]['type'];
-    //   const duoi = ['png', 'jpg', 'qpeg', 'PNG', 'JPG'];
-    //   let tach = getType.split('/');
-    //   // console.log(tach[1]);
+    if (input.nameProduct === '') {
+      // errorSubmit.nameProduct = 'vui lòng nhập nameproduct';
+      toast.error('vui lòng nhập nameproduct');
 
-    //   if (getSize > 1024 * 1024) {
-    //     errorSubmit.avata = 'lỗi';
-    //   } else if (!duoi.includes(tach[1])) {
-    //     errorSubmit.avata = 'lỗi';
-    //   }
-    // }
+      flag = false;
+    }
+    if (input.category === '') {
+      // errorSubmit.category = 'vui lòng nhập category';
+      toast.error('vui lòng chọn category');
+
+      flag = false;
+    }
+    if (input.brand === '') {
+      // errorSubmit.brand = 'vui lòng nhập brand';
+      toast.error('vui lòng chọn brand');
+
+      flag = false;
+    }
+    if (input.price === '') {
+      toast.error('vui lòng nhập price');
+
+      // errorSubmit.price = 'vui lòng nhập price';
+      flag = false;
+    }
+    if (input.quantity === '') {
+      toast.error('vui lòng nhập quantity');
+
+      // errorSubmit.quantity = 'vui long nhap quantity';
+      flag = false;
+    }
+    //xử lý file
+    if (getFile === '') {
+      // errorSubmit.img = 'vui lòng thêm file';
+      toast.error('vui lòng thêm file');
+
+      flag = false;
+    } else {
+      let getSize = getFile[0]['size'];
+      let getType = getFile[0]['type'];
+      const duoi = ['png', 'jpg', 'qpeg', 'PNG', 'JPG'];
+      let tach = getType.split('/');
+      // console.log(tach[1]);
+
+      if (getSize > 1024 * 1024) {
+        errorSubmit.avata = 'lỗi';
+      } else if (!duoi.includes(tach[1])) {
+        errorSubmit.avata = 'lỗi';
+      }
+    }
     if (!flag) {
       setErrors({ errorSubmit });
     } else {

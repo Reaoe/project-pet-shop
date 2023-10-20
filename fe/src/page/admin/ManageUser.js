@@ -46,7 +46,7 @@ const ManageUser = () => {
         axios.delete(`http://localhost:8080/api/v1/users/${id}`);
         setTimeout(function () {
           window.location.reload();
-        }, 5000);
+        }, 2000);
       }
     });
   };

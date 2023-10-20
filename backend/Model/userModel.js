@@ -1,18 +1,18 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [false, "Xin vui long dien ten cua ban!"],
+    required: [false, 'Xin vui long dien ten cua ban!'],
   },
   lastName: {
     type: String,
-    required: [false, "Xin vui long dien ten cua ban!"],
+    required: [false, 'Xin vui long dien ten cua ban!'],
   },
   email: {
     type: String,
-    required: [true, "Xin vui long dien dia chi email cua ban"],
-    // unique: true,
+    required: [true, 'Xin vui long dien dia chi email cua ban'],
+    unique: true,
     lowercase: true,
     //  validate: [validator.isEmail, 'Please provide a valid email']
   },
@@ -34,12 +34,12 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["user", "staff", "admin"],
-    default: "user",
+    enum: ['user', 'staff', 'admin'],
+    default: 'user',
   },
   password: {
     type: String,
-    required: [false, "Please provide a password"],
+    required: [false, 'Please provide a password'],
     minlength: 8,
     select: false,
   },
@@ -50,9 +50,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
   // Dòng này kiểm tra xem trường password của tài liệu đã được thay đổi hay chưa
-  if (!this.isModified("password")) {
+  if (!this.isModified('password')) {
     return next();
   }
   // Mã hóa passworld
@@ -67,6 +67,16 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, usePassword);
 };
 
-const User = mongoose.model("User", userSchema);
+userSchema.pre('save', async function (next) {
+  const user = this;
+
+  const existingUser = await User.findOne({ email: user.email });
+  if (existingUser) {
+    return next(new AppError('Email đã tồn tại!!', 404));
+  }
+
+  next();
+});
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

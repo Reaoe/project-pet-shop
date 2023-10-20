@@ -74,11 +74,15 @@ const CreateProduct = () => {
   // console.log(dataCategoryChild);
   const handleOptionsChild = () => {
     return dataCategoryChild?.map((item) => {
+      console.log(item);
       return <option key={item.id}>{item.nameCategory}</option>;
     });
   };
   //file
+
   const [getFile, setFile] = useState({});
+  console.log(getFile);
+
   const handlfile = (e) => {
     setFile(e.target.files);
   };
@@ -95,13 +99,13 @@ const CreateProduct = () => {
 
       flag = false;
     }
-    if (input.category === '') {
+    if (dataCategory === '') {
       // errorSubmit.category = 'vui lòng nhập category';
       toast.error('vui lòng chọn category');
 
       flag = false;
     }
-    if (input.brand === '') {
+    if (dataCategoryChild === '') {
       // errorSubmit.brand = 'vui lòng nhập brand';
       toast.error('vui lòng chọn brand');
 
@@ -120,7 +124,7 @@ const CreateProduct = () => {
       flag = false;
     }
     //xử lý file
-    if (getFile === '') {
+    if (Object.keys(getFile).length === 0) {
       // errorSubmit.img = 'vui lòng thêm file';
       toast.error('vui lòng thêm file');
 
@@ -159,6 +163,13 @@ const CreateProduct = () => {
             setErrors(res.data.error);
           } else {
             console.log(res.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 400) {
+              toast.error('vui lòng chọn category và brand');
+            }
           }
         });
     }

@@ -23,12 +23,6 @@ const Register = () => {
     setCheck(e.target.checked);
   };
 
-  // const regex =
-  //   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  // console.log(regex.test(inputs.email));
-
-  // console.log($('#email').on('input', validate))
-
   function handleSubmit(e) {
     e.preventDefault();
     let errorsSubmit = {};
@@ -75,6 +69,13 @@ const Register = () => {
             setErrors(res.data.errors);
           } else {
             console.log(res.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 400) {
+              toast.error('Tài Khoản đã tồn tại');
+            }
           }
         });
     }

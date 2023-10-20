@@ -36,7 +36,7 @@ const Login = () => {
       toast.error('Email chưa được nhập');
       flag = false;
     }
-    
+
     if (inputs.password === '') {
       // errorsSubmit.password = 'Vui lòng nhập mật khẩu';
       toast.error('Mật Khẩu chưa được nhập');
@@ -63,11 +63,20 @@ const Login = () => {
           if (response.status === 201) {
             Swal.fire('Successful!', '', 'success');
           }
+
           if (response.data.error) {
             setErrors(response.data.error);
           } else {
             localStorage.setItem('login', JSON.stringify(response.data));
             navigate('/');
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 401) {
+              console.log('aaa');
+              toast.error('Tài khoản mật khẩu không chính xác');
+            }
           }
         });
       localStorage.setItem('kt', JSON.stringify(kt));

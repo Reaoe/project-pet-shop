@@ -77,6 +77,7 @@ const UpdateProduct = ({ editProduct, render }) => {
     setFile(e.target.files);
     setImage(e.target.files[0]);
   };
+
   const handleImgClick = () => {
     imgRef.current.click();
   };
@@ -91,13 +92,13 @@ const UpdateProduct = ({ editProduct, render }) => {
 
       flag = false;
     }
-    if (input.category === '') {
+    if (dataCategory === '') {
       // errorSubmit.category = 'vui lòng nhập category';
       toast.error('vui lòng chọn category');
 
       flag = false;
     }
-    if (input.brand === '') {
+    if (dataCategoryChild === '') {
       // errorSubmit.brand = 'vui lòng nhập brand';
       toast.error('vui lòng chọn brand');
 
@@ -116,14 +117,10 @@ const UpdateProduct = ({ editProduct, render }) => {
       flag = false;
     }
     //xử lý file
-    if (getFile === '') {
-      // errorSubmit.img = 'vui lòng thêm file';
-      toast.error('vui lòng thêm file');
 
-      flag = false;
-    } else {
-      let getSize = getFile[0]['size'];
-      let getType = getFile[0]['type'];
+    if (Object.keys(image).length !== 0) {
+      let getSize = image[0]['size'];
+      let getType = image[0]['type'];
       const duoi = ['png', 'jpg', 'qpeg', 'PNG', 'JPG'];
       let tach = getType.split('/');
       // console.log(tach[1]);
@@ -134,9 +131,7 @@ const UpdateProduct = ({ editProduct, render }) => {
         errorSubmit.avata = 'lỗi';
       }
     }
-    if (!flag) {
-      setErrors({ errorSubmit });
-    } else {
+    if (flag) {
       const formData = new FormData();
       formData.append('productName', input.nameProduct);
       formData.append('category', categoryID);
@@ -159,6 +154,13 @@ const UpdateProduct = ({ editProduct, render }) => {
             setErrors(res.data.error);
           } else {
             console.log(res.data);
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 500) {
+              toast.error('vui lòng chọn category và brand');
+            }
           }
         });
     }

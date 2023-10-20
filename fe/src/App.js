@@ -4,6 +4,7 @@ import {
   CreateCategory,
   CreateProduct,
   Dashboard,
+  ManageCategory,
   ManageOrder,
   ManageProduct,
   ManageUser,
@@ -45,6 +46,7 @@ function App() {
             <Route path={path.MANAGE_USER} element={<ManageUser />} />
             <Route path={path.CREATE_PRODUCT} element={<CreateProduct />} />
             <Route path={path.CREATE_CATEGORY} element={<CreateCategory />} />
+            <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           </Route>
 
           <Route path={path.CART} element={<Cart />} />

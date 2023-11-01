@@ -1,0 +1,11 @@
+{
+  "firstName": "Le Thanh",
+  "lastName": "Hieu",
+  "email": "hieu123@gmail.com",
+  "phone": "02312243244",
+  "address": {
+    "city": "da nang",
+    "district": "Hoa vang",
+    "ward": "Hoa tien"
+  }
+}
